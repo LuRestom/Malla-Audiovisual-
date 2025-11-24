@@ -1,538 +1,97 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Tecnicatura Universitaria en Producción Audiovisual — Malla Interactiva</title>
-
-<!-- Fuente suave -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-  :root{
-    --bg: #fff9f9;
-    --card: #fff;
-    --muted: #9a9a9a;
-    --accent: #b33;
-    --soft-red: #ffe9e9;
-    --soft-orange: #fff3e6;
-    --soft-yellow: #fffbe6;
-    --soft-green: #e9fff0;
-    --soft-cyan: #e9fbff;
-    --soft-violet: #f3e9ff;
-    --shadow: 0 6px 16px rgba(0,0,0,0.06);
-  }
-
-  html,body{
-    height:100%;
-    margin:0;
-    background: linear-gradient(180deg, var(--bg), #fff);
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: #222;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
-
-  .wrap{
-    max-width:1200px;
-    margin:18px auto;
-    padding:18px;
-  }
-
-  header{
-    text-align:center;
-    margin-bottom:14px;
-  }
-
-  header h1{
-    margin:0 0 6px 0;
-    font-size:20px;
-    color:var(--accent);
-  }
-  header p{
-    margin:0;
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  .controls{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    align-items:center;
-    margin:14px 0;
-  }
-
-  .controls button{
-    background:var(--accent);
-    color:white;
-    border:0;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    box-shadow:var(--shadow);
-    font-weight:600;
-  }
-  .controls button.secondary{
-    background:#fff;
-    border:1px solid #eee;
-    color:#444;
-    font-weight:500;
-  }
-
-  /* Grid general: 3 columnas (Año 1, Año 2, Año 3) */
-  .grid-años{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:14px;
-    align-items:start;
-  }
-
-  .año-card{
-    background:var(--card);
-    border-radius:10px;
-    padding:12px;
-    box-shadow:var(--shadow);
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    height:100%;
-  }
-
-  .año-card h2{
-    margin:0;
-    font-size:16px;
-    color:var(--accent);
-    text-align:center;
-  }
-
-  .bloque-cuatrimestre{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    padding:8px;
-    border-radius:8px;
-  }
-
-  .bloque-cuatrimestre strong{
-    display:block;
-    font-size:13px;
-    margin-bottom:6px;
-    color:#333;
-  }
-
-  /* Columnas de materias (lista compacta). */
-  .lista-materias{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-
-  .materia{
-    position:relative;
-    padding:8px 10px;
-    border-radius:8px;
-    background: #fff;
-    border:1px solid #f0dede;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-    font-size:14px;
-  }
-
-  .materia:hover{ transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.06); }
-
-  .materia .left{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    min-width:0;
-  }
-
-  .dot {
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    flex:0 0 10px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-  }
-
-  /* Estilos por cuatrimestre / año para diferenciar visualmente */
-  .cuat-1 { background: linear-gradient(90deg,var(--soft-red), #fff); border-color: #ffd6d6; }
-  .cuat-2 { background: linear-gradient(90deg,var(--soft-orange), #fff); border-color: #ffead6; }
-  .cuat-anual { background: linear-gradient(90deg,var(--soft-yellow), #fff); border-color: #fff6d6; }
-
-  .cuat2-1 { background: linear-gradient(90deg,var(--soft-green), #fff); border-color: #e6ffea; }
-  .cuat2-2 { background: linear-gradient(90deg,var(--soft-cyan), #fff); border-color: #e6fbff; }
-  .cuat2-anual { background: linear-gradient(90deg,var(--soft-violet), #fff); border-color: #f1e6ff; }
-
-  .cuat3-1 { background: linear-gradient(90deg,#ffe6fb,#fff); border-color:#f6dff6; }
-
-  /* Bloqueada (no clickeable) */
-  .materia.bloqueada{
-    filter:grayscale(0.1);
-    opacity:0.9;
-    cursor:default;
-  }
-
-  /* Tooltip simple: usamos data-tooltip y pseudo-elementos */
-  .materia.bloqueada[data-tooltip]:hover::after{
-    content: attr(data-tooltip);
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:calc(100% + 8px);
-    background: #222;
-    color: #fff;
-    font-size:12px;
-    padding:8px 10px;
-    border-radius:6px;
-    white-space:pre-line;
-    z-index:60;
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
-    max-width:260px;
-    text-align:left;
-  }
-  .materia.bloqueada[data-tooltip]:hover::before{
-    content: "";
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:calc(100% + 2px);
-    border:6px solid transparent;
-    border-top-color:#222;
-    z-index:61;
-  }
-
-  /* Aprobada: tachado + difuminada */
-  .materia.aprobada{
-    text-decoration:line-through;
-    opacity:0.45;
-    filter:blur(0.3px);
-    pointer-events:none;
-  }
-
-  .materia .badge{
-    font-size:12px;
-    padding:4px 8px;
-    border-radius:999px;
-    background:rgba(0,0,0,0.06);
-  }
-
-  /* contador y leyenda */
-  .footer{
-    margin-top:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  .legend{
-    display:flex;
-    gap:10px;
-    align-items:center;
-  }
-  .legend .item{ display:flex; gap:6px; align-items:center; color:#555; font-size:13px; }
-  .legend .sw{ width:14px; height:14px; border-radius:4px; border:1px solid #eee; }
-
-  /* Responsive: una columna en pantallas pequeñas */
-  @media (max-width:920px){
-    .grid-años{ grid-template-columns: 1fr; }
-    .materia.bloqueada[data-tooltip]:hover::after{ left:12px; transform:none; }
-    .materia.bloqueada[data-tooltip]:hover::before{ left:28px; transform:none; }
-  }
-</style>
-</head>
-<body>
-
-<div class="wrap">
-  <header>
-    <h1>Tecnicatura Universitaria en Producción Audiovisual (UnCUYO)</h1>
-    <p>Malla interactiva — clic para marcar aprobada. Las materias con correlativas aparecen bloqueadas hasta aprobar los requisitos.</p>
-  </header>
-
-  <div class="controls">
-    <button id="btn-reset" title="Borrar progreso guardado">Reiniciar progreso</button>
-    <button id="btn-export" class="secondary" title="Copiar progreso (JSON) al portapapeles">Exportar progreso</button>
-    <button id="btn-import" class="secondary" title="Importar progreso pegando JSON">Importar progreso</button>
-  </div>
-
-  <!-- GRID Principal: 3 columnas para los 3 años -->
-  <div class="grid-años" id="gridAnios" aria-live="polite"></div>
-
-  <div class="footer">
-    <div class="legend">
-      <div class="item"><span class="sw" style="background:var(--soft-red)"></span> 1° Año - 1° C.</div>
-      <div class="item"><span class="sw" style="background:var(--soft-orange)"></span> 1° Año - 2° C.</div>
-      <div class="item"><span class="sw" style="background:var(--soft-yellow)"></span> 1° Año - Anuales</div>
-      <div class="item"><span class="sw" style="background:var(--soft-green)"></span> 2° Año - 1° C.</div>
-      <div class="item"><span class="sw" style="background:var(--soft-cyan)"></span> 2° Año - 2° C.</div>
-      <div class="item"><span class="sw" style="background:var(--soft-violet)"></span> 2° Año - Anuales</div>
-      <div class="item"><span class="sw" style="background:#ffe6fb"></span> 3° Año - 1° C.</div>
-    </div>
-
-    <div id="contador">Aprobadas: 0</div>
-  </div>
-</div>
-
-<script>
-/*
-  Malla: definimos cada materia con id, nombre, y lista de 'abre' (a quién desbloquea).
-  Luego calculamos las prereqs (quién necesita qué) invirtiendo la relación.
-*/
-const cursos = [
-  // PRIMER AÑO - 1° Cuatrimestre
-  { id: "electricidad", name: "Electricidad y Mantenimiento", abre: ["produccion_televisiva","sonido"], año:1, cuatri:1 },
-  { id: "guion", name: "Guion", abre: ["arte_diseno","produccion_comunitaria","produccion_televisiva","sonido"], año:1, cuatri:1 },
-  { id: "medios", name: "Medios de Comunicación y Cultura", abre: ["semiotica","estetica","produccion_comunitaria"], año:1, cuatri:1 },
-
-  // PRIMER AÑO - 2° Cuatrimestre
-  { id: "semiotica", name: "Semiótica", abre: ["estetica","audiovisual_ii"], año:1, cuatri:2 },
-  { id: "arte_diseno", name: "Arte y Diseño Digital", abre: ["edicion","realizacion_audiovisual","narrativa_transmedia"], año:1, cuatri:2 },
-  { id: "produccion_comunitaria", name: "Producción Comunitaria", abre: ["audiovisual_ii","derecho_audiovisual"], año:1, cuatri:2 },
-  { id: "produccion_televisiva", name: "Producción Televisiva", abre: ["edicion","audiovisual_ii","derecho_audiovisual","realizacion_audiovisual"], año:1, cuatri:2 },
-
-  // PRIMER AÑO - Anuales
-  { id: "fotografia", name: "Fotografía, Iluminación y Cámara", abre: ["edicion","audiovisual_ii","realizacion_audiovisual","narrativa_transmedia"], año:1, cuatri:"anual" },
-  { id: "audiovisual_i", name: "Audiovisual I", abre: ["audiovisual_ii","realizacion_audiovisual","derecho_audiovisual","narrativa_transmedia"], año:1, cuatri:"anual" },
-  { id: "practica_1", name: "Práctica Profesional (1° año)", abre: [], año:1, cuatri:"anual" },
-
-  // SEGUNDO AÑO - 1° Cuatrimestre
-  { id: "estetica", name: "Estética Audiovisual", abre: ["derecho_audiovisual"], año:2, cuatri:1 },
-  { id: "sonido", name: "Sonido", abre: ["audiovisual_iii"], año:2, cuatri:1 },
-
-  // SEGUNDO AÑO - 2° Cuatrimestre
-  { id: "derecho_audiovisual", name: "Derecho Audiovisual", abre: ["audiovisual_iii"], año:2, cuatri:2 },
-  { id: "realizacion_audiovisual", name: "Realización Audiovisual", abre: [], año:2, cuatri:2 },
-  { id: "narrativa_transmedia", name: "Narrativa Transmedia", abre: ["ingles"], año:2, cuatri:2 },
-
-  // SEGUNDO AÑO - Anuales
-  { id: "edicion", name: "Edición", abre: ["audiovisual_iii"], año:2, cuatri:"anual" },
-  { id: "audiovisual_ii", name: "Audiovisual II", abre: ["ingles","direccion_arte"], año:2, cuatri:"anual" },
-  { id: "practica_2", name: "Práctica Profesional (2° año)", abre: [], año:2, cuatri:"anual" },
-  { id: "tp_final_2", name: "TP Final (2° año)", abre: [], año:2, cuatri:"anual" },
-
-  // TERCER AÑO - 1° Cuatrimestre
-  { id: "ingles", name: "Inglés", abre: [], año:3, cuatri:1 },
-  { id: "direccion_arte", name: "Dirección de arte y Ambientación", abre: [], año:3, cuatri:1 },
-  { id: "electiva_1", name: "Electiva I", abre: [], año:3, cuatri:1 },
-  { id: "electiva_2", name: "Electiva II", abre: [], año:3, cuatri:1 },
-  { id: "audiovisual_iii", name: "Audiovisual III", abre: [], año:3, cuatri:1 },
-  { id: "practica_3", name: "Práctica Profesional (3° año)", abre: [], año:3, cuatri:1 },
-  { id: "tp_final_3", name: "TP Final (3° año)", abre: [], año:3, cuatri:1 }
+titulo: "SEGUNDO CUATRIMESTRE",
+items: ["Derecho Audiovisual", "Realización Audiovisual", "Narrativa Transmedia"]
+},
+{
+titulo: "ANUALES",
+items: ["Edición", "Audiovisual II", "Practica Profesional 2", "TP FINAL 2"]
+}
+]
+},
+{
+titulo: "MATERIAS TERCER AÑO",
+bloques: [
+{
+titulo: "PRIMER CUATRIMESTRE",
+items: ["Inglés", "Dirección de Arte y Ambientación", "Electiva I", "Electiva II", "Audiovisual III", "Practica Profesional 3", "TP FINAL 3"]
+}
+]
+}
 ];
 
-/* Invertir 'abre' para calcular prerequisitos: por ejemplo, si A abre B, entonces B tiene como prereq a A */
-const prereqs = {}; // { cursoId: [ids de prereq] }
-cursos.forEach(c=>{
-  if(!c.abre || c.abre.length===0) return;
-  c.abre.forEach(target=>{
-    // buscar id del target por coincidencia con id o con name (por si se usó nombre en abre)
-    const targetObj = cursos.find(x => x.id === target || x.name.toLowerCase() === target.toLowerCase());
-    const targetId = targetObj ? targetObj.id : target; // si no encontró, usa lo que vino (mejor si coincide)
-    if(!prereqs[targetId]) prereqs[targetId]=[];
-    if(!prereqs[targetId].includes(c.id)) prereqs[targetId].push(c.id);
-  });
+
+let aprobadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
+
+
+function guardar() {
+localStorage.setItem("aprobadas", JSON.stringify(aprobadas));
+}
+
+
+function render() {
+const cont = document.getElementById("malla");
+cont.innerHTML = "";
+
+
+estructura.forEach(anio => {
+const anioDiv = document.createElement("div");
+anioDiv.className = "anio";
+anioDiv.innerHTML = `<h2>${anio.titulo}</h2>`;
+
+
+anio.bloques.forEach(b => {
+const bDiv = document.createElement("div");
+bDiv.className = b.titulo.includes("ANUALES") ? "anuales" : "cuatri";
+bDiv.innerHTML = `<h3>${b.titulo}</h3>`;
+
+
+b.items.forEach(m => {
+const mat = document.createElement("div");
+mat.className = "materia";
+mat.textContent = m;
+
+
+const req = materias[m];
+const cumple = req.every(r => aprobadas.includes(r));
+
+
+if (!cumple) {
+mat.classList.add("bloqueada");
+mat.title = "Requiere: " + req.join(", ");
+}
+
+
+if (aprobadas.includes(m)) mat.classList.add("aprobada");
+
+
+mat.addEventListener("click", () => {
+if (mat.classList.contains("bloqueada")) return;
+
+
+if (aprobadas.includes(m)) {
+aprobadas = aprobadas.filter(x => x !== m);
+} else {
+aprobadas.push(m);
+}
+guardar();
+render();
 });
 
-/* LocalStorage key */
-const STORAGE_KEY = "malla_pua_aprobadas_v1";
 
-/* Cargamos aprobadas desde localStorage (array de ids) */
-let aprobadas = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-/* Función para guardar */
-function guardar(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(aprobadas));
-  actualizarContador();
-}
-
-/* Obtener nombre legible de id */
-function nombreDe(id){
-  const c = cursos.find(x=>x.id===id);
-  return c ? c.name : id;
-}
-
-/* Construir la UI (grid de años) */
-function buildUI(){
-  const grid = document.getElementById("gridAnios");
-  grid.innerHTML = ""; // reset
-
-  [1,2,3].forEach(año=>{
-    const card = document.createElement("div");
-    card.className = "año-card";
-    card.setAttribute("role","region");
-    card.setAttribute("aria-label", `${año} año`);
-    card.innerHTML = `<h2>${año}° Año</h2>`;
-
-    // cuatrimestres: 1, 2, anual
-    const cuatros = [
-      { key:1, label:"1° Cuatrimestre", cls: (año===1?"cuat-1":(año===2?"cuat2-1":"cuat3-1")) },
-      { key:2, label:"2° Cuatrimestre", cls: (año===1?"cuat-2":"cuat2-2") },
-      { key:"anual", label:"Anuales", cls: (año===1?"cuat-anual":"cuat2-anual") }
-    ];
-
-    cuatros.forEach(c=>{
-      const block = document.createElement("div");
-      block.className = "bloque-cuatrimestre";
-      block.innerHTML = `<strong>${c.label}</strong>`;
-      const lista = document.createElement("div");
-      lista.className = "lista-materias";
-
-      cursos.filter(x => x.año === año && x.cuatri === c.key)
-            .forEach(m=>{
-        const item = document.createElement("div");
-        item.className = "materia " + c.cls;
-        item.setAttribute("data-id", m.id);
-        item.setAttribute("tabindex",0);
-        item.innerHTML = `<div class="left"><span class="dot" style="background:${colorDot(año,c.key)}"></span><div style="min-width:0"><div class="title">${m.name}</div><div style="font-size:11px;color:var(--muted)">${m.id}</div></div></div><div class="badge"></div>`;
-
-        // determinar si está aprobada
-        if(aprobadas.includes(m.id)){
-          item.classList.add("aprobada");
-          item.querySelector(".badge").textContent = "✔";
-        } else {
-          // determinar prereqs faltantes
-          const reqs = prereqs[m.id] || [];
-          const faltan = reqs.filter(r=>!aprobadas.includes(r));
-          if(faltan.length>0){
-            item.classList.add("bloqueada");
-            item.setAttribute("data-tooltip", "Faltan: " + faltan.map(id=>nombreDe(id)).join("\n"));
-            item.querySelector(".badge").textContent = "🔒";
-          } else {
-            item.querySelector(".badge").textContent = "";
-          }
-        }
-
-        // click y tecla Enter para marcar/aprobar
-        item.addEventListener("click", ()=> onClickMateria(m.id));
-        item.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" ") { e.preventDefault(); onClickMateria(m.id);} });
-
-        lista.appendChild(item);
-      });
-
-      block.appendChild(lista);
-      card.appendChild(block);
-    });
-
-    grid.appendChild(card);
-  });
-
-  actualizarContador();
-}
-
-/* Color del dot según año/cuatrimestre (solo estético) */
-function colorDot(año, cuatri){
-  if(año===1 && cuatri===1) return "#ff8c8c";
-  if(año===1 && cuatri===2) return "#ffb07a";
-  if(año===1 && cuatri==="anual") return "#ffe08a";
-  if(año===2 && cuatri===1) return "#9af2bf";
-  if(año===2 && cuatri===2) return "#9fe8ff";
-  if(año===2 && cuatri==="anual") return "#d6c6ff";
-  if(año===3) return "#ffb0f0";
-  return "#ccc";
-}
-
-/* Accion al clickar una materia */
-function onClickMateria(id){
-  // Si ya aprobada: des-aprobar (y cascada de desaprobar dependientes)
-  if(aprobadas.includes(id)){
-    if(!confirm(`¿Deseás desmarcar como aprobada "${nombreDe(id)}"?\nSe desaprobarán también las materias que dependan de ella.`)) return;
-    cascadeUnapprove(id);
-    guardar();
-    buildUI();
-    return;
-  }
-
-  // Si está bloqueada: mostrar mensaje (no debería poder clicear si bloqueada, pero por teclado o accesibilidad)
-  const reqs = prereqs[id] || [];
-  const faltan = reqs.filter(r=>!aprobadas.includes(r));
-  if(faltan.length>0){
-    alert("No podés aprobar esta materia todavía. Faltan:\n• " + faltan.map(x=>nombreDe(x)).join("\n• "));
-    return;
-  }
-
-  // aprobar
-  aprobadas.push(id);
-  guardar();
-  buildUI();
-}
-
-/* Si desaprobamos una materia, también desaprueban recursivamente las que dependen de ella */
-function cascadeUnapprove(id){
-  // quitar id
-  aprobadas = aprobadas.filter(x=>x!==id);
-  // buscar dependientes directos
-  const dependientes = Object.keys(prereqs).filter(k => (prereqs[k]||[]).includes(id));
-  dependientes.forEach(dep=>{
-    if(aprobadas.includes(dep)){
-      cascadeUnapprove(dep);
-    }
-  });
-}
-
-/* Contador de aprobadas */
-function actualizarContador(){
-  const cont = document.getElementById("contador");
-  cont.textContent = `Aprobadas: ${aprobadas.length} / ${cursos.length}`;
-}
-
-/* Reiniciar progreso */
-document.getElementById("btn-reset").addEventListener("click", ()=>{
-  if(confirm("¿Seguro que querés reiniciar todo el progreso?")) {
-    aprobadas = [];
-    guardar();
-    buildUI();
-  }
+bDiv.appendChild(mat);
 });
 
-/* Exportar progreso (copiar JSON al portapapeles) */
-document.getElementById("btn-export").addEventListener("click", async ()=>{
-  const json = JSON.stringify(aprobadas);
-  try{
-    await navigator.clipboard.writeText(json);
-    alert("Progreso copiado al portapapeles (JSON). Podés pegarlo en un archivo o usar Importar.");
-  }catch(e){
-    prompt("Copia manualmente el progreso JSON:", json);
-  }
+
+anioDiv.appendChild(bDiv);
 });
 
-/* Importar progreso (pedir JSON y validar) */
-document.getElementById("btn-import").addEventListener("click", ()=>{
-  const entrada = prompt("Pega aquí el JSON de progreso (array de ids). Ej: [\"guion\",\"electricidad\"]");
-  if(!entrada) return;
-  try{
-    const arr = JSON.parse(entrada);
-    if(!Array.isArray(arr)) throw new Error("No es un array");
-    // validar ids
-    const todosIds = cursos.map(c=>c.id);
-    const invalid = arr.filter(x=>!todosIds.includes(x));
-    if(invalid.length>0){
-      if(!confirm("Se encontraron IDs desconocidos: " + invalid.join(", ") + "\n¿Deseas ignorarlos y cargar el resto?")) return;
-    }
-    aprobadas = arr.filter(x=>todosIds.includes(x));
-    guardar();
-    buildUI();
-    alert("Progreso importado.");
-  }catch(err){
-    alert("JSON inválido: " + err.message);
-  }
+
+cont.appendChild(anioDiv);
 });
+}
 
-/* Primero: construir prereqs implicitos de cursos que no tienen entrada en prereqs */
-cursos.forEach(c => { if(!prereqs[c.id]) prereqs[c.id] = []; });
 
-/* Cargar UI inicial */
-buildUI();
-
+render();
 </script>
 </body>
 </html>
