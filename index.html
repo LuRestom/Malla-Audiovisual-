@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+titulo: "MATERIAS TERCER AÑO",
+bloques: [
+{
+titulo: "PRIMER CUATRIMESTRE",
+items: ["Inglés", "Dirección de Arte y Ambientación", "Electiva I", "Electiva II", "Audiovisual III", "Practica Profesional 3", "TP FINAL 3"]
+}
+]
+}
+];
+
+
+let aprobadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
+
+
+function guardar() {
+localStorage.setItem("aprobadas", JSON.stringify(aprobadas));
+}
 
 
 function render() {
