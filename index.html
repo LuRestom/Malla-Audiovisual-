@@ -9,15 +9,14 @@
 
 <style>
   :root{
-    --color1: #4acabb; /* aqua */
-    --color2: #cbe5c0; /* light green */
-    --color3: #fcf9c2; /* light yellow */
-    --color4: #edc5bd; /* peach */
-    --color5: #84407b; /* purple */
-    --bg: #fffdfb;
+    --color1: #99cccc;
+    --color2: #a8bdc2;
+    --color3: #b8aeb8;
+    --color4: #c79ead;
+    --color5: #d78fa3;
+    --bg: #fffdfc;
     --card-shadow: 0 8px 20px rgba(0,0,0,0.06);
   }
-
   *{box-sizing:border-box}
   body{
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
@@ -26,12 +25,11 @@
     color:#222;
     padding:18px;
   }
-
-  header{ text-align:center; margin-bottom:14px; }
+  header{ text-align:center; margin-bottom:12px; }
   header h1{ margin:0; color:var(--color5); font-size:22px; }
   header p{ margin:6px 0 0 0; color:#666; font-size:13px }
 
-  .top-controls{ display:flex; gap:10px; justify-content:center; margin:14px 0 20px 0; flex-wrap:wrap }
+  .top-controls{ display:flex; gap:10px; justify-content:center; margin:12px 0 18px 0; flex-wrap:wrap }
   .btn{
     padding:8px 12px; border-radius:8px; border:0; cursor:pointer; font-weight:600;
     box-shadow:var(--card-shadow);
@@ -41,16 +39,16 @@
 
   .layout{
     display:grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 360px;
     gap:18px;
     align-items:start;
   }
 
-  /* Columnas por año (verticales) - dentro del area principal */
+  /* Years columns (vertical lists) */
   .years{
     display:flex;
     gap:14px;
-    justify-content:center;
+    justify-content:flex-start;
     align-items:flex-start;
     flex-wrap:nowrap;
     overflow-x:auto;
@@ -58,12 +56,13 @@
   }
 
   .year {
-    width: 300px;
-    background: linear-gradient(180deg,#fff, #fffaf8);
+    width: 320px;
+    background: linear-gradient(180deg,#ffffff,#fffaf8);
     border-radius:12px;
     padding:12px;
     box-shadow: var(--card-shadow);
     border-left:6px solid var(--color2);
+    flex:0 0 auto;
   }
 
   .year h2{ margin:0 0 8px 0; font-size:18px; color:var(--color5); text-align:center }
@@ -76,7 +75,7 @@
   }
   .block h3{ margin:0 0 8px 0; font-size:14px; color:#444; text-align:center }
 
-  /* materia card */
+  /* subject card */
   .subject{
     display:flex;
     align-items:center;
@@ -96,59 +95,48 @@
   .subject .left{ display:flex; align-items:center; gap:10px; min-width:0 }
   .subject .dot{ width:10px; height:10px; border-radius:50%; background:var(--color1); flex:0 0 10px }
   .subject .title{ min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
-
   .subject:hover{ transform:translateY(-3px) }
 
-  /* DIFFERENT COLORS per block - soft */
+  /* coloring per year/section (soft) */
   .year1 .block1 .subject{ border-left-color: var(--color1); background: linear-gradient(90deg,var(--color1), #fff); }
   .year1 .block2 .subject{ border-left-color: var(--color2); background: linear-gradient(90deg,var(--color2), #fff); }
   .year1 .blockA .subject{ border-left-color: var(--color3); background: linear-gradient(90deg,var(--color3), #fff); }
 
-  .year2 .block1 .subject{ border-left-color: #9fe8bf; background: linear-gradient(90deg,#d9fbe6,#fff); }
-  .year2 .block2 .subject{ border-left-color: #9fdcf2; background: linear-gradient(90deg,#e9fbff,#fff); }
-  .year2 .blockA .subject{ border-left-color: #e6dbff; background: linear-gradient(90deg,#f6edff,#fff); }
+  .year2 .block1 .subject{ border-left-color: var(--color2); background: linear-gradient(90deg,#dff3ef,#fff); }
+  .year2 .block2 .subject{ border-left-color: var(--color3); background: linear-gradient(90deg,#efe9f2,#fff); }
+  .year2 .blockA .subject{ border-left-color: var(--color4); background: linear-gradient(90deg,#fff0f4,#fff); }
 
   .year3 .block1 .subject{ border-left-color: var(--color4); background: linear-gradient(90deg,var(--color4), #fff); }
 
-  /* bloqueada = transparent */
+  /* blocked subjects are transparent */
   .subject.bloqueada{
-    opacity:0.2;
+    opacity:0.18;
     cursor: default;
-    filter: grayscale(0.15);
+    filter: grayscale(0.12);
   }
 
-  /* tooltip custom (para bloqueadas) */
+  /* tooltip for blocked */
   .subject.bloqueada[data-tooltip]:hover::after{
     content: attr(data-tooltip);
     position:absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(100% + 12px);
-    background: #222;
-    color: #fff;
-    font-size:13px;
-    padding:8px 10px;
-    border-radius:8px;
-    white-space: pre-line;
-    z-index:60;
-    max-width:260px;
-    text-align:left;
-    box-shadow: 0 8px 26px rgba(0,0,0,0.2);
+    left:50%;
+    transform:translateX(-50%);
+    bottom:calc(100% + 10px);
+    background:#222; color:#fff; font-size:13px; padding:8px 10px; border-radius:8px;
+    white-space:pre-line; z-index:60; max-width:260px; text-align:left; box-shadow:0 8px 26px rgba(0,0,0,0.2);
   }
   .subject.bloqueada[data-tooltip]:hover::before{
-    content: "";
+    content:"";
     position:absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(100% + 6px);
-    border:6px solid transparent;
-    border-top-color:#222;
-    z-index:61;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:calc(100% + 4px);
+    border:6px solid transparent; border-top-color:#222; z-index:61;
   }
 
-  /* aprobada styles: tachado + difuminado */
+  /* approved: strike + diffused */
   .subject.aprobada{
-    text-decoration: line-through;
+    text-decoration:line-through;
     opacity:0.45;
     background: linear-gradient(90deg,#f0fff0,#fff);
     border-left-color:#8be88b;
@@ -156,7 +144,7 @@
     pointer-events:none;
   }
 
-  /* side panel for prereqs + practice */
+  /* side panel */
   .side{
     background:#fff;
     padding:12px;
@@ -164,7 +152,6 @@
     box-shadow:var(--card-shadow);
     height:fit-content;
   }
-
   .side h3{ margin:0 0 8px 0; color:var(--color5) }
   .prereqs{ margin-bottom:12px; font-size:14px; color:#333 }
   .prereqs ul{ padding-left:18px; margin:8px 0 0 0; color:#444 }
@@ -172,12 +159,12 @@
 
   .progress-box{ margin-top:10px }
   .progress-label{ font-size:13px; color:#444; margin-bottom:6px }
-  .progress-bar{ width:100%; height:16px; background:#f3f3f3; border-radius:8px; overflow:hidden; border:1px solid #eee }
+  .progress-bar{ width:100%; height:18px; background:#f3f3f3; border-radius:10px; overflow:hidden; border:1px solid #eee }
   .progress-fill{ height:100%; background: linear-gradient(90deg,var(--color1),var(--color2)); width:0%; transition:width .4s ease }
 
   .hours-controls{ display:flex; gap:8px; margin-top:8px }
-  .hours-controls input{ width:100px; padding:6px; border-radius:8px; border:1px solid #ddd }
-  .hours-controls button{ padding:6px 8px; border-radius:8px; border:0; background:var(--color5); color:#fff; cursor:pointer }
+  .hours-controls input{ width:120px; padding:8px; border-radius:8px; border:1px solid #ddd }
+  .hours-controls button{ padding:8px 10px; border-radius:8px; border:0; background:var(--color5); color:#fff; cursor:pointer }
 
   .congrats{
     margin-top:12px;
@@ -189,11 +176,8 @@
     font-weight:600;
   }
 
-  /* small helpers */
-  .muted{ color:#666; font-size:13px }
   .small{ font-size:12px; color:#666 }
 
-  /* responsive */
   @media (max-width:980px){
     .layout{ grid-template-columns: 1fr; }
     .years{ overflow-x:scroll; padding-bottom:12px }
@@ -215,13 +199,13 @@
   <div class="layout">
     <main>
       <div class="years" id="yearsContainer" aria-live="polite">
-        <!-- Years columns will be populated here -->
+        <!-- columnas por año se generan aquí -->
       </div>
     </main>
 
     <aside class="side" id="sidePanel" aria-live="polite">
       <h3>Detalle / Requisitos</h3>
-      <div id="selectedTitle" class="muted">Seleccioná una materia para ver sus requisitos</div>
+      <div id="selectedTitle" class="small">Seleccioná una materia para ver sus requisitos</div>
 
       <div class="prereqs" id="prereqsBox" style="display:none">
         <div class="small">Requisitos pendientes:</div>
@@ -238,7 +222,7 @@
           <input id="hoursInput" type="number" placeholder="Agregar horas" min="1" />
           <button id="addHoursBtn" class="btn primary">Agregar</button>
         </div>
-        <div class="small" style="margin-top:8px">Al alcanzar <b>260 hs</b> se desbloquea la materia <b>TIF</b>.</div>
+        <div class="small" style="margin-top:8px">Al alcanzar <b>260 hs</b> se desbloquea la materia <b>TIF</b> si además están aprobados el resto de los espacios.</div>
 
         <div id="tifBox" style="margin-top:12px"></div>
       </div>
@@ -248,12 +232,7 @@
   </div>
 
 <script>
-/* --- DATA: materia list + prereqs per your structure --- */
-
-/*
-We'll use ids (slug-like) and map to names + prereq ids.
-'opensTIF' notation in your spec is omitted because TIF unlocking is driven by practice hours >= 260.
-*/
+/* --- Datos de materias (ids, nombres, año, cuatri, prereq ids) --- */
 
 const subjects = [
   // PRIMER AÑO - 1° cuatri
@@ -270,9 +249,7 @@ const subjects = [
   // PRIMER AÑO - Anuales
   { id:"fotografia", name:"Fotografía, Iluminación y Cámara", year:1, cuatri:"A", prereq:[] },
   { id:"audiovisual_i", name:"Audiovisual I", year:1, cuatri:"A", prereq:[] },
-
-  // PRACTICA 1 (handled as subject visually but hours shared)
-  { id:"practica_1", name:"Práctica Profesional (1° año)", year:1, cuatri:"A", prereq:[] , isPractice:true },
+  { id:"practica_1", name:"Práctica Profesional (1° año)", year:1, cuatri:"A", prereq:[], isPractice:true },
 
   // SEGUNDO AÑO - 1° cuatri
   { id:"estetica", name:"Estética Audiovisual", year:2, cuatri:1, prereq:["medios","semiotica"] },
@@ -298,27 +275,42 @@ const subjects = [
   { id:"practica_3", name:"Práctica Profesional (3° año)", year:3, cuatri:1, prereq:[], isPractice:true },
   { id:"tpfinal3", name:"TP FINAL (3° año)", year:3, cuatri:1, prereq:[] },
 
-  // TIF (Trabajo Integrador Final) - desbloqueo por horas >= 260
-  { id:"tif", name:"TIF (Trabajo Integrador Final)", year:2, cuatri:"A", prereq:[], isTIF:true }
+  // TIF (trabajo integrador final) - desbloqueo por horas y por aprobar todo el resto
+  { id:"tif", name:"TIF (Trabajo Integrador Final)", year:3, cuatri:"A", prereq:[], isTIF:true }
 ];
 
-/* localStorage keys */
-const LS_APPROVED = "malla_uncuyo_approved_v1";
-const LS_HOURS = "malla_uncuyo_practice_hours_v1";
+/* --- LocalStorage keys & state --- */
+const LS_APPROVED = "malla_uncuyo_approved_v2";
+const LS_HOURS   = "malla_uncuyo_hours_v2";
 
-/* load state */
 let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
 let practiceHours = Number(localStorage.getItem(LS_HOURS)) || 0;
 
-/* helpers */
 function saveState(){
   localStorage.setItem(LS_APPROVED, JSON.stringify(approved));
   localStorage.setItem(LS_HOURS, String(practiceHours));
 }
 
-/* UI render */
+/* --- Helper functions --- */
+function getSub(id){ return subjects.find(s=>s.id===id) }
+function unmetReqs(sub){
+  const reqs = sub.prereq || [];
+  return reqs.filter(r=> !approved.includes(r));
+}
+function isUnlocked(sub){
+  if(sub.isTIF){
+    // TIF needs practiceHours >=260 AND all other subjects (except itself) approved
+    const allOtherIds = subjects.filter(s=>s.id!=="tif").map(s=>s.id);
+    const allApproved = allOtherIds.every(id => approved.includes(id));
+    return practiceHours >= 260 && allApproved;
+  }
+  // normal subj unlocked if all prereqs approved
+  return unmetReqs(sub).length === 0;
+}
+
+/* --- UI --- */
 const yearsContainer = document.getElementById("yearsContainer");
-const sidePanelTitle = document.getElementById("selectedTitle");
+const sideTitle = document.getElementById("selectedTitle");
 const prereqList = document.getElementById("prereqList");
 const prereqsBox = document.getElementById("prereqsBox");
 const hoursText = document.getElementById("hoursText");
@@ -326,131 +318,89 @@ const progressFill = document.getElementById("progressFill");
 const tifBox = document.getElementById("tifBox");
 const graduationBox = document.getElementById("graduationBox");
 
-function getSubject(id){ return subjects.find(s=>s.id===id); }
-
-function unmetPrereqs(subject){
-  const reqs = subject.prereq || [];
-  return reqs.filter(r => !approved.includes(r));
-}
-
-function isUnlocked(subject){
-  // Practice unlocks TIF specifically:
-  if(subject.isTIF){
-    return practiceHours >= 260;
-  }
-  // normal subjects unlocked if all prereqs approved
-  const unmet = unmetPrereqs(subject);
-  return unmet.length === 0;
-}
-
-function renderYears(){
+function render(){
   yearsContainer.innerHTML = "";
   [1,2,3].forEach(y=>{
-    const col = document.createElement("div");
-    col.className = `year year${y}`;
+    const col = document.createElement("div"); col.className = `year year${y}`;
     col.innerHTML = `<h2>${y}° Año</h2>`;
-    // blocks: cuatri1, cuatri2, anuales (A)
-    const block1 = document.createElement("div"); block1.className="block block1";
-    block1.innerHTML = `<h3>1° Cuatrimestre</h3>`;
-    const block2 = document.createElement("div"); block2.className="block block2";
-    block2.innerHTML = `<h3>2° Cuatrimestre</h3>`;
-    const blockA = document.createElement("div"); blockA.className="block blockA";
-    blockA.innerHTML = `<h3>Anuales</h3>`;
+    const b1 = document.createElement("div"); b1.className="block block1"; b1.innerHTML=`<h3>1° Cuatrimestre</h3>`;
+    const b2 = document.createElement("div"); b2.className="block block2"; b2.innerHTML=`<h3>2° Cuatrimestre</h3>`;
+    const bA = document.createElement("div"); bA.className="block blockA"; bA.innerHTML=`<h3>Anuales</h3>`;
 
-    subjects.filter(s=>s.year===y && s.cuatri===1).forEach(s => block1.appendChild(createSubjectNode(s)));
-    subjects.filter(s=>s.year===y && s.cuatri===2).forEach(s => block2.appendChild(createSubjectNode(s)));
-    subjects.filter(s=>s.year===y && (s.cuatri==="A" || s.cuatri==="a" || s.cuatri==="anual" || s.cuatri==="A")).forEach(s => blockA.appendChild(createSubjectNode(s)));
+    subjects.filter(s=>s.year===y && s.cuatri===1).forEach(s=> b1.appendChild(subjectNode(s)));
+    subjects.filter(s=>s.year===y && s.cuatri===2).forEach(s=> b2.appendChild(subjectNode(s)));
+    subjects.filter(s=>s.year===y && (s.cuatri==="A"||s.cuatri==="a"||s.cuatri==="anual")).forEach(s=> bA.appendChild(subjectNode(s)));
 
-    col.appendChild(block1);
-    col.appendChild(block2);
-    col.appendChild(blockA);
-
+    col.appendChild(b1); col.appendChild(b2); col.appendChild(bA);
     yearsContainer.appendChild(col);
   });
 
-  // also render TIF somewhere visible in year 2 annuals area
-  // ensure TIF node exists in its correct place via above loop (we placed it year:2 cuatri:A)
-  renderSidePanel(null);
   updateProgressUI();
+  renderSide(null);
 }
 
-function createSubjectNode(s){
-  const div = document.createElement("div");
-  div.className = "subject";
-  div.setAttribute("data-id", s.id);
-  div.tabIndex = 0;
+function subjectNode(s){
+  const d = document.createElement("div");
+  d.className = "subject";
+  d.dataset.id = s.id;
+  d.tabIndex = 0;
 
   const left = document.createElement("div"); left.className="left";
   const dot = document.createElement("div"); dot.className="dot";
   left.appendChild(dot);
-  const title = document.createElement("div"); title.className="title";
-  title.textContent = s.name;
+  const title = document.createElement("div"); title.className="title"; title.textContent = s.name;
   left.appendChild(title);
 
   const badge = document.createElement("div"); badge.className="small";
 
-  div.appendChild(left);
-  div.appendChild(badge);
+  d.appendChild(left); d.appendChild(badge);
 
-  // state classes
   if(approved.includes(s.id)){
-    div.classList.add("aprobada");
+    d.classList.add("aprobada");
     badge.textContent = "✔";
   } else {
     if(!isUnlocked(s)){
-      div.classList.add("bloqueada");
-      const unmet = unmetPrereqs(s);
-      let text = "Faltan: " + (unmet.length ? unmet.map(id=> getSubject(id)?.name || id).join("\\n") : "Prerrequisitos");
-      // tooltip via data-tooltip
-      div.setAttribute("data-tooltip", text);
+      d.classList.add("bloqueada");
+      const unmet = unmetReqs(s);
+      let text = "Faltan:\n";
+      if(s.isTIF){
+        text += `- 260 hs de prácticas (acreditadas: ${practiceHours})\n- Tener aprobados todos los espacios curriculares (incluidas electivas)`;
+      } else {
+        if(unmet.length) text += unmet.map(id=> getSub(id)?.name || id).join("\n");
+        else text += "Prerrequisitos";
+      }
+      d.setAttribute("data-tooltip", text);
       badge.textContent = "🔒";
     } else {
       badge.textContent = "";
     }
   }
 
-  // click behavior
-  div.addEventListener("click", (e)=>{
-    // show side panel for this subject
-    renderSidePanel(s.id);
-    // if unlocked and not approved, approve on click
-    if(!approved.includes(s.id) && isUnlocked(s)){
-      // but for practice nodes (isPractice) we don't auto-approve; they track hours
-      if(s.isPractice){
-        // show side panel only
-        return;
-      }
+  d.addEventListener("click", ()=>{
+    renderSide(s.id);
+    // approve if unlocked and not practice & not tif
+    if(!approved.includes(s.id) && isUnlocked(s) && !s.isPractice && !s.isTIF){
       approved.push(s.id);
       saveState();
-      renderYears();
+      render();
     } else if(approved.includes(s.id)){
-      // allow un-approve with confirmation (and cascade)
-      if(confirm(`¿Desmarcar como aprobada "${s.name}"?\nSe desaprobarán las materias que dependan de ella.`)){
+      if(confirm(`¿Desmarcar como aprobada "${s.name}"? Se desaprobarán las materias que dependan de ella.`)){
         cascadeUnapprove(s.id);
         saveState();
-        renderYears();
+        render();
       }
-    } else {
-      // blocked click => just show prereqs
-      // side panel already shown
     }
   });
 
-  // keyboard support (Enter / Space)
-  div.addEventListener("keydown", (ev)=>{
-    if(ev.key === "Enter" || ev.key === " "){
-      ev.preventDefault();
-      div.click();
-    }
-  });
+  d.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); d.click(); } });
 
-  return div;
+  return d;
 }
 
-/* cascade unapprove: desaprobar recursivamente */
+/* cascade unapprove: quitar aprobado y todos los dependientes que requieran => recursivo */
 function cascadeUnapprove(id){
   approved = approved.filter(x=>x!==id);
-  // find dependents: subjects that have id in prereq
+  // find dependents
   subjects.forEach(s=>{
     if(s.prereq && s.prereq.includes(id)){
       if(approved.includes(s.id)) cascadeUnapprove(s.id);
@@ -458,23 +408,24 @@ function cascadeUnapprove(id){
   });
 }
 
-/* --- Side panel logic --- */
-function renderSidePanel(selectedId){
+/* side panel render */
+function renderSide(selectedId){
   if(!selectedId){
-    sidePanelTitle.textContent = "Seleccioná una materia para ver sus requisitos";
+    sideTitle.textContent = "Seleccioná una materia para ver sus requisitos";
     prereqsBox.style.display = "none";
+    tifBox.innerHTML = "";
     return;
   }
-  const s = getSubject(selectedId);
-  sidePanelTitle.textContent = s.name;
+  const s = getSub(selectedId);
+  sideTitle.textContent = s.name;
 
-  const unmet = unmetPrereqs(s);
-  if(unmet.length > 0){
+  const unmet = unmetReqs(s);
+  if(unmet.length){
     prereqsBox.style.display = "block";
     prereqList.innerHTML = "";
     unmet.forEach(id=>{
       const li = document.createElement("li");
-      li.textContent = getSubject(id)?.name || id;
+      li.textContent = getSub(id)?.name || id;
       prereqList.appendChild(li);
     });
   } else {
@@ -482,81 +433,70 @@ function renderSidePanel(selectedId){
     prereqList.innerHTML = "<li style='color:green'>No faltan prerequisitos</li>";
   }
 
-  // Special display: if subject isTIF
+  tifBox.innerHTML = "";
   if(s.isTIF){
-    tifBox.innerHTML = "";
-    if(practiceHours < 260){
-      const p = document.createElement("div");
-      p.className = "small";
-      p.textContent = "TIF se desbloquea al alcanzar 260 hs de práctica. Acreditadas: " + practiceHours + " hs.";
+    if(practiceHours < 260 || !allOtherApproved()){
+      const p = document.createElement("div"); p.className="small";
+      p.innerHTML = `TIF requiere <b>260 hs</b> de prácticas y haber aprobado <b>todos</b> los espacios curriculares (incluidas electivas).<br>Horas acreditadas: <b>${practiceHours}</b> hs.`;
       tifBox.appendChild(p);
     } else {
-      const p = document.createElement("div");
-      p.className = "small";
-      p.innerHTML = `<b>TIF desbloqueada</b> — ya podés cursarla/inscribirte.`;
+      const p = document.createElement("div"); p.className="small";
+      p.innerHTML = `TIF disponible — ya cumpliste horas y requisitos.`;
       tifBox.appendChild(p);
-      // if not approved yet, give button to marcar aprobada
       if(!approved.includes("tif")){
         const btn = document.createElement("button");
         btn.textContent = "Marcar TIF como aprobada";
-        btn.className = "btn primary";
+        btn.className="btn primary";
         btn.style.marginTop = "8px";
-        btn.onclick = ()=>{
-          approved.push("tif");
-          saveState();
-          renderYears();
-          showGraduation();
-        };
+        btn.onclick = ()=>{ approved.push("tif"); saveState(); render(); checkGraduation(); };
         tifBox.appendChild(btn);
       }
     }
   } else {
-    // if the selected is not TIF, show nothing special (tifBox cleared)
-    tifBox.innerHTML = "";
+    // nothing additional
   }
 }
 
-/* --- Practice hours logic --- */
+/* All other subjects approved? (for TIF requirement) */
+function allOtherApproved(){
+  const otherIds = subjects.filter(s=>s.id!=="tif").map(s=>s.id);
+  return otherIds.every(id => approved.includes(id));
+}
+
+/* hours UI */
 const hoursInput = document.getElementById("hoursInput");
 const addHoursBtn = document.getElementById("addHoursBtn");
 
 function updateProgressUI(){
   hoursText.textContent = `${practiceHours} / 260 hs`;
-  const pct = Math.min(100, Math.round((practiceHours / 260) * 100));
+  const pct = Math.min(100, Math.round((practiceHours/260)*100));
   progressFill.style.width = pct + "%";
 
-  // if reached 260 and tif not yet approved, show congratulations and unlock tif availability
+  // if reached 260 and all other approved, notify
   if(practiceHours >= 260){
-    // reveal tif node visual change - rerender will handle isUnlocked
-    const tifSubject = document.querySelector('[data-id="tif"]');
-    if(tifSubject) tifSubject.classList.remove("bloqueada");
-    // show small message in side panel if tif unlocked
-    graduationBox.innerHTML = `<div class="congrats">¡Felicidades! Alcanzaste 260 hs. La materia <b>TIF</b> está ahora disponible.</div>`;
-  } else {
-    // hide congrat if any
-    if(!approved.includes("tif")){
-      graduationBox.innerHTML = "";
+    if(allOtherApproved() && !approved.includes("tif")){
+      // TIF can be marked
+      graduationBox.innerHTML = `<div class="congrats">¡Felicidades! Alcanzaste 260 hs. Podés rendir TIF si además aprobaste el resto de las materias.</div>`;
+    } else if(approved.includes("tif")){
+      graduationBox.innerHTML = `<div class="congrats">¡Felicidades, te recibiste! 🎓 Ya sos Productor/ra Audiovisual.</div>`;
+    } else {
+      // show partial notice
+      graduationBox.innerHTML = `<div class="small">260 hs alcanzadas — aún faltan algunas materias por aprobar para rendir TIF.</div>`;
     }
+  } else {
+    if(!approved.includes("tif")) graduationBox.innerHTML = "";
   }
 }
 
-/* add hours button */
 addHoursBtn.addEventListener("click", ()=>{
-  const val = Number(hoursInput.value || 0);
-  if(!val || val <= 0){ alert("Ingresa una cantidad de horas válida (>0)."); return; }
+  const val = Number(hoursInput.value||0);
+  if(!val || val<=0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
   practiceHours += val;
   if(practiceHours < 0) practiceHours = 0;
   saveState();
   hoursInput.value = "";
-  renderYears();
+  render();
 });
-
-/* show graduation when TIF approved */
-function showGraduation(){
-  if(approved.includes("tif")){
-    document.getElementById("graduationBox").innerHTML = `<div class="congrats">¡Felicidades, te recibiste! 🎓<br>Ya sos Productor/ra Audiovisual.</div>`;
-  }
-}
 
 /* export / import / reset */
 document.getElementById("resetBtn").addEventListener("click", ()=>{
@@ -564,7 +504,7 @@ document.getElementById("resetBtn").addEventListener("click", ()=>{
     approved = [];
     practiceHours = 0;
     saveState();
-    renderYears();
+    render();
     graduationBox.innerHTML = "";
   }
 });
@@ -594,7 +534,7 @@ document.getElementById("importBtn").addEventListener("click", ()=>{
       approved = parsed.approved.filter(x=>ids.includes(x));
       practiceHours = parsed.practiceHours;
       saveState();
-      renderYears();
+      render();
       alert("Progreso importado.");
     } else {
       alert("JSON con formato inválido.");
@@ -605,9 +545,16 @@ document.getElementById("importBtn").addEventListener("click", ()=>{
 });
 
 /* initial render */
-renderYears();
+render();
 updateProgressUI();
-showGraduation();
+
+/* check graduation (if tif approved) */
+function checkGraduation(){
+  if(approved.includes("tif")){
+    graduationBox.innerHTML = `<div class="congrats">¡Felicidades, te recibiste! 🎓 Ya sos Productor/ra Audiovisual.</div>`;
+  }
+}
+checkGraduation();
 
 </script>
 </body>
