@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Malla — Tecnicatura en Producción Audiovisual (UNCUYO)</title>
 
+<!-- Fuente agradable -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -14,138 +15,151 @@
     --color3: #413b6b;
     --color4: #5c65c0;
     --color5: #6f95ff;
-
-    --soft-1: #3b2843; /* softer when approved */
-    --soft-2: #4a3a63;
-    --soft-3: #6b68a3;
-    --soft-4: #8a93d6;
-    --soft-5: #b7c9ff;
-
-    --bg: #fbfcff;
-    --card-shadow: 0 18px 40px rgba(43,54,74,0.06);
+    --bg: #f7f8fb;
+    --shadow: 0 18px 40px rgba(31,36,61,0.08);
   }
 
   *{box-sizing:border-box}
   body{
     margin:0;
-    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+    font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     background: linear-gradient(180deg,var(--bg),#ffffff);
-    color:var(--color5);
+    color:var(--color1);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    padding:28px;
+    padding:30px;
   }
 
-  .container{ max-width:1240px; margin:0 auto; text-align:center; }
+  .container{
+    max-width:1280px;
+    margin:0 auto;
+    text-align:center;
+  }
 
-  header h1{ margin:0; font-size:34px; color:var(--color5); }
-  header p{ margin:8px 0 0; color:#2b2b2b; font-size:16px }
+  header{ margin-bottom:20px; }
+  header h1{ margin:0; font-size:34px; color:var(--color3); }
+  header p.lead{ margin:8px 0 0; color:#3b3650; font-size:16px; }
 
-  .top-links{ margin-top:8px; font-size:14px }
-  .top-links a{ color:var(--color4); text-decoration:none; font-weight:600; }
-
-  /* malla recuadros centrada */
+  /* malla principal centrada: años en recuadros */
   .malla-box{
-    margin:22px auto;
-    padding:18px;
-    border-radius:16px;
-    background:linear-gradient(180deg,#fff,#fffaf7);
-    box-shadow:var(--card-shadow);
     display:flex;
-    gap:20px;
+    gap:22px;
     justify-content:center;
     align-items:flex-start;
+    margin:26px auto;
+    padding:18px;
+    border-radius:14px;
+    background:linear-gradient(180deg,#fff,#fbfcff);
+    box-shadow:var(--shadow);
     flex-wrap:wrap;
   }
 
   .year{
-    width:340px;
-    background:linear-gradient(180deg,#ffffff,#fffefc);
+    width:360px;
+    background:linear-gradient(180deg,#ffffff,#fcfdff);
     border-radius:12px;
     padding:16px;
     text-align:left;
-    box-shadow:0 8px 26px rgba(0,0,0,0.04);
+    box-shadow:0 8px 26px rgba(31,36,61,0.05);
     flex:0 0 auto;
   }
-  .year h2{ margin:0 0 10px; font-size:20px; color:var(--color4); text-align:center; }
+  .year h2{ margin:0 0 12px; font-size:20px; color:var(--color4); text-align:center; }
 
   .block{ margin-bottom:12px; padding:8px 0; border-radius:10px; background:transparent; }
-  .block h3{ margin:0 0 8px; font-size:16px; color:#333; text-align:center; }
+  .block h3{ margin:0 0 8px; font-size:16px; color:#2e2b3d; text-align:center; }
 
-  /* materia card: todas con color base var(--color3) y al aprobar -> soft */
+  /* tarjeta materia */
   .subject{
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    padding:12px 14px; border-radius:10px; margin:8px 0;
-    background: linear-gradient(90deg,var(--color3), #fff);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px;
+    border-radius:10px;
+    margin:8px 0;
+    background:linear-gradient(90deg,var(--color1), #fff);
     border-left:8px solid var(--color4);
-    cursor:pointer; transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease, background .18s ease;
-    font-size:18px; font-weight:700; color:var(--color5);
+    cursor:pointer;
+    transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+    font-size:18px; font-weight:600; color:var(--color5);
     position:relative;
+    overflow:visible;
   }
-  .subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.06); }
+  .subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(31,36,61,0.06); }
 
-  /* if you want year-specific tinting, you can change background by parent */
-  .year1 .subject{ background: linear-gradient(90deg,var(--color1), #fff); border-left-color:var(--color4); }
-  .year2 .subject{ background: linear-gradient(90deg,var(--color2), #fff); border-left-color:var(--color4); }
-  .year3 .subject{ background: linear-gradient(90deg,var(--color3), #fff); border-left-color:var(--color4); }
+  /* subtle tints per year */
+  .year1 .subject{ background: linear-gradient(90deg,var(--color1), #fff); color:var(--color5) }
+  .year2 .subject{ background: linear-gradient(90deg,var(--color2), #fff); color:var(--color5) }
+  .year3 .subject{ background: linear-gradient(90deg,var(--color3), #fff); color:var(--color5) }
 
-  /* blocked: transparent */
+  /* blocked = transparent */
   .subject.bloqueada{
-    opacity:0.18; cursor:default; filter:grayscale(0.06); transform:none; box-shadow:none;
+    opacity:0.18;
+    cursor:default;
+    filter:grayscale(0.06);
+    transform:none;
+    box-shadow:none;
   }
 
   /* tooltip for blocked */
   .subject.bloqueada[data-tooltip]:hover::after{
     content: attr(data-tooltip);
     position:absolute;
-    left:50%; transform:translateX(-50%);
+    left:50%;
+    transform:translateX(-50%);
     bottom:calc(100% + 10px);
-    background:#111; color:#fff; padding:10px 12px; border-radius:8px;
-    white-space:pre-line; z-index:80; max-width:320px; text-align:left; font-size:14px;
+    background:#111; color:#fff; font-size:14px; padding:10px 12px;
+    border-radius:8px; white-space:pre-line; z-index:80; max-width:320px; text-align:left;
     box-shadow:0 12px 36px rgba(0,0,0,0.25);
   }
   .subject.bloqueada[data-tooltip]:hover::before{
-    content:""; position:absolute; left:50%; transform:translateX(-50%);
-    bottom:calc(100% + 4px); border:7px solid transparent; border-top-color:#111; z-index:81;
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:calc(100% + 4px);
+    border:7px solid transparent; border-top-color:#111; z-index:81;
   }
 
-  /* approved: softer color and strike */
+  /* approved: strike + diffused */
   .subject.aprobada{
     text-decoration:line-through;
-    opacity:0.65;
+    opacity:0.55;
     pointer-events:none;
-    background: linear-gradient(90deg,var(--soft-3), #fff);
-    border-left-color: var(--soft-4);
-    color:#ffffff;
+    background:linear-gradient(90deg,#fff,#f7fff9);
+    border-left-color:var(--color3);
+    color:#333;
+    cursor:default;
   }
 
-  /* practice box bottom */
-  .practice-wrap{ display:flex; justify-content:center; margin-top:22px }
+  /* practice box centered below */
+  .practice-wrap{ display:flex; justify-content:center; margin-top:26px; }
   .practice-box{
-    width:920px; max-width:calc(100% - 40px); padding:16px; border-radius:12px;
-    background:linear-gradient(180deg,#fff,#fffefc); box-shadow:var(--card-shadow); text-align:center;
+    width:980px; max-width:calc(100% - 40px); padding:18px; border-radius:12px;
+    background:linear-gradient(180deg,#fff,#fbfcff); box-shadow:var(--shadow); text-align:center;
   }
-  .practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
+  .practice-title{ font-size:18px; color:var(--color4); margin:0 0 8px; }
 
   .progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
   .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color4),var(--color5)); transition:width .45s ease }
 
-  .hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
+  .hours-controls{ margin-top:12px; display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap }
   .hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e8e8e8; font-size:16px }
   .hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; font-weight:700; cursor:pointer }
 
-  /* modal */
-  .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200 }
-  .modal-card{ background:#fff; padding:26px; border-radius:12px; width:92%; max-width:520px; text-align:center; box-shadow:0 26px 80px rgba(0,0,0,0.28) }
+  .controls{ margin-top:12px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+  .btn-ghost{ padding:10px 12px; border-radius:10px; border:1px solid #eee; background:#fff; cursor:pointer; color:var(--color3); font-weight:700 }
+
+  /* modal centered for messages */
+  .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; }
+  .modal-card{ background:#fff; padding:22px 24px; border-radius:12px; width:92%; max-width:560px; text-align:center; box-shadow:0 26px 80px rgba(0,0,0,0.28) }
   .modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:22px }
   .modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
   .modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
 
-  .controls { display:flex; gap:10px; justify-content:center; margin-top:10px; flex-wrap:wrap }
-
   @media (max-width:1100px){
     .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
-    .year{ width:92%; max-width:540px }
+    .year{ width:92%; max-width:640px }
     .practice-box{ width:92% }
   }
   @media (max-width:520px){
@@ -157,15 +171,15 @@
   <div class="container">
     <header>
       <h1>Malla — Tecnicatura Universitaria en Producción Audiovisual (UNCUYO)</h1>
-      <p class="lead">Click en una materia para marcarla como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
-      <div class="top-links"><a href="/mnt/data/Correlativas TUPA (1).pdf" target="_blank">Ver correlativas (PDF)</a></div>
+      <p class="lead">Click en una materia para marcarla como aprobada. Las materias dependientes aparecen transparentes hasta aprobar los requisitos.</p>
+      <div style="margin-top:8px"><a href="/mnt/data/Correlativas TUPA (1).pdf" target="_blank" style="color:var(--color4); font-weight:600; text-decoration:none">Ver correlativas (PDF)</a></div>
     </header>
 
     <div class="malla-box" role="region" aria-label="Malla curricular">
 
       <!-- PRIMER AÑO -->
-      <div class="year year1">
-        <h2>PRIMER AÑO</h2>
+      <div class="year year1" aria-labelledby="y1">
+        <h2 id="y1">PRIMER AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -186,8 +200,8 @@
       </div>
 
       <!-- SEGUNDO AÑO -->
-      <div class="year year2">
-        <h2>SEGUNDO AÑO</h2>
+      <div class="year year2" aria-labelledby="y2">
+        <h2 id="y2">SEGUNDO AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -207,8 +221,8 @@
       </div>
 
       <!-- TERCER AÑO -->
-      <div class="year year3">
-        <h2>TERCER AÑO</h2>
+      <div class="year year3" aria-labelledby="y3">
+        <h2 id="y3">TERCER AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -222,52 +236,57 @@
       </div>
     </div>
 
-    <!-- practice box -->
+    <!-- practice box centered below -->
     <div class="practice-wrap">
       <div class="practice-box" role="region" aria-label="Prácticas profesionales">
         <div class="practice-title">Prácticas Profesionales — acreditan <strong>260 hs</strong></div>
-        <div class="small" style="margin-bottom:8px">Acumulá horas; al alcanzar 260 hs y aprobar las materias, se habilita TIF.</div>
+        <div class="small" style="margin-bottom:8px">Acumulá horas. Al alcanzar 260 hs, se habilita TIF (además deben aprobarse todas las materias).</div>
 
-        <div class="progress-bar">
+        <div class="progress-bar" title="Horas acreditadas">
           <div class="progress-fill" id="progressFill" style="width:0%"></div>
         </div>
 
         <div class="hours-controls" style="margin-top:12px">
-          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." />
-          <button id="addHoursBtn">Agregar horas</button>
-          <div id="hoursText" style="font-weight:700; color:var(--color5); margin-left:10px">0 / 260 hs</div>
+          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." aria-label="Agregar horas"/>
+          <button id="addHoursBtn" class="btn-ghost">Agregar horas</button>
+          <div id="hoursText" style="font-weight:700; color:var(--color3); margin-left:10px">0 / 260 hs</div>
         </div>
 
         <div class="controls" style="margin-top:12px">
-          <button id="resetBtn" class="btn ghost">Reiniciar progreso</button>
-          <button id="exportBtn" class="btn ghost">Exportar progreso</button>
-          <button id="importBtn" class="btn ghost">Importar progreso</button>
+          <button id="resetBtn" class="btn-ghost">Reiniciar progreso</button>
+          <button id="exportBtn" class="btn-ghost">Exportar progreso</button>
+          <button id="importBtn" class="btn-ghost">Importar progreso</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- modal -->
-  <div id="modal" class="modal" style="display:none">
-    <div class="modal-card" role="dialog" aria-modal="true">
-      <h2 id="modalTitle"></h2>
-      <p id="modalText"></p>
-      <button id="modalClose">Cerrar</button>
+    <!-- modal generic -->
+    <div id="modal" class="modal" style="display:none">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <h2 id="modalTitle">Título</h2>
+        <p id="modalText">Texto</p>
+        <button id="modalClose">Cerrar</button>
+      </div>
     </div>
+
   </div>
 
 <script>
-/* Prerrequisitos */
+/* ----------------------------
+   Prerrequisitos por id
+   ---------------------------- */
 const prereqs = {
   "electricidad": [],
   "guion": [],
   "medios": [],
+
   "semiotica": ["medios"],
   "arte_diseno": ["guion"],
   "produccion_comunitaria": ["guion","medios"],
   "produccion_televisiva": ["electricidad","guion"],
   "fotografia": [],
   "audiovisual_i": [],
+
   "estetica": ["medios","semiotica"],
   "sonido": ["electricidad","guion"],
   "derecho": ["produccion_televisiva","audiovisual_i","produccion_comunitaria","estetica"],
@@ -275,25 +294,17 @@ const prereqs = {
   "narrativa": ["arte_diseno","fotografia","audiovisual_i"],
   "edicion": ["arte_diseno","fotografia","produccion_televisiva"],
   "audiovisual_ii": ["audiovisual_i","fotografia","produccion_televisiva","produccion_comunitaria","semiotica"],
+
   "ingles": ["narrativa","audiovisual_ii"],
   "direccion_arte": ["audiovisual_ii"],
   "electiva1": [],
   "electiva2": [],
   "audiovisual_iii": ["sonido","edicion","derecho"],
+
   "tif": []
 };
 
-const allSubjects = Object.keys(prereqs).filter(id=>id!=="tif");
-
-/* localStorage keys */
-const LS_APPROVED = "malla_uncuyo_v_colors_approved";
-const LS_HOURS = "malla_uncuyo_v_colors_hours";
-
-/* load state */
-let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
-let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
-
-/* helpers */
+/* human names */
 function human(id){
   const map = {
     electricidad:"Electricidad y Mantenimiento", guion:"Guion", medios:"Medios de Comunicación y Cultura",
@@ -307,17 +318,32 @@ function human(id){
   return map[id] || id;
 }
 
+/* all subject ids (except tif) */
+const allSubjects = Object.keys(prereqs).filter(id=>id!=="tif");
+
+/* localStorage keys */
+const LS_APPROVED = "malla_uncuyo_approved_custom";
+const LS_HOURS = "malla_uncuyo_hours_custom";
+
+/* load state */
+let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
+let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
+
+function saveState(){ localStorage.setItem(LS_APPROVED, JSON.stringify(approved)); localStorage.setItem(LS_HOURS, String(hours)); }
+
+/* unmet prereqs list */
 function unmet(id){
   if(id==="tif"){
-    const missing = allSubjects.filter(sid => !approved.includes(sid));
-    const arr = [];
-    if(hours < 260) arr.push("260 hs de prácticas");
-    if(missing.length) arr.push("Aprobar todas las materias (faltan: " + missing.map(human).join(", ") + ")");
-    return arr;
+    const missingSubjects = allSubjects.filter(sid => !approved.includes(sid));
+    const miss = [];
+    if(hours < 260) miss.push("260 hs de prácticas");
+    if(missingSubjects.length) miss.push("Aprobar todas las materias (faltan: " + missingSubjects.map(human).join(", ") + ")");
+    return miss;
   }
   return (prereqs[id] || []).filter(r => !approved.includes(r)).map(human);
 }
 
+/* unlocked? */
 function unlocked(id){
   if(id==="tif"){
     return hours >= 260 && allSubjects.every(sid => approved.includes(sid));
@@ -325,11 +351,8 @@ function unlocked(id){
   return unmet(id).length === 0;
 }
 
-/* save */
-function saveState(){ localStorage.setItem(LS_APPROVED, JSON.stringify(approved)); localStorage.setItem(LS_HOURS, String(hours)); }
-
-/* render */
-function renderAll(){
+/* render UI state */
+function render(){
   document.querySelectorAll(".subject").forEach(el=>{
     const id = el.dataset.id;
     el.classList.remove("bloqueada","aprobada");
@@ -343,38 +366,39 @@ function renderAll(){
     }
   });
 
-  // progress UI
+  // progress bar
   const pct = Math.min(100, Math.round((hours/260)*100));
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("hoursText").textContent = hours + " / 260 hs";
 
-  // year completion messages
+  // year completion checks
   checkYearCompletion();
 
-  // if tif approved
-  if(approved.includes("tif")){
-    showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual");
-  }
+  // if tif approved => congrats modal
+  if(approved.includes("tif")) showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual");
 }
 
-/* attach behavior */
+/* add click behaviour */
 document.querySelectorAll(".subject").forEach(el=>{
   el.addEventListener("click", ()=>{
     const id = el.dataset.id;
     if(!unlocked(id)){
+      // focus so tooltip can be seen on keyboard users
       el.focus();
       return;
     }
     if(!approved.includes(id)){
+      // approve
       approved.push(id);
       saveState();
-      renderAll();
+      render();
       return;
     } else {
-      if(confirm(`¿Desmarcar como aprobada '${human(id)}'? Se desaprobarán las materias que dependan de ella.`)){
+      // un-approve with cascade confirmation
+      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'?\nSe desaprobarán también las materias que dependen de ella.")){
         cascadeUnapprove(id);
         saveState();
-        renderAll();
+        render();
       }
     }
   });
@@ -389,29 +413,29 @@ function cascadeUnapprove(id){
       cascadeUnapprove(k);
     }
   });
-  // if tif now locked, remove
   if(approved.includes("tif") && !unlocked("tif")) approved = approved.filter(x=>x!=="tif");
 }
 
 /* hours controls */
 document.getElementById("addHoursBtn").addEventListener("click", ()=>{
   const v = Number(document.getElementById("hoursInput").value || 0);
-  if(!v || v<=0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
+  if(!v || v <= 0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
   hours += v;
   if(hours < 0) hours = 0;
   saveState();
   document.getElementById("hoursInput").value = "";
-  renderAll();
+  render();
 });
 
-/* export/import/reset */
+/* reset / export / import */
 document.getElementById("resetBtn").addEventListener("click", ()=>{
   if(confirm("¿Seguro que querés reiniciar todo el progreso (aprobadas y horas)?")){
-    approved = []; hours = 0; saveState(); renderAll();
+    approved = []; hours = 0; saveState(); render();
   }
 });
 document.getElementById("exportBtn").addEventListener("click", async ()=>{
-  const data = { approved, hours }; const json = JSON.stringify(data);
+  const data = { approved, hours };
+  const json = JSON.stringify(data);
   try{ await navigator.clipboard.writeText(json); alert("Progreso copiado al portapapeles."); }
   catch(e){ prompt("Copia manualmente este JSON:", json); }
 });
@@ -427,12 +451,15 @@ document.getElementById("importBtn").addEventListener("click", ()=>{
         if(!confirm("Se encontraron IDs desconocidos: " + invalid.join(", ") + "\nSe ignorarán.")) return;
       }
       approved = parsed.approved.filter(x=>ids.includes(x));
-      hours = parsed.hours; saveState(); renderAll(); alert("Progreso importado.");
+      hours = parsed.hours;
+      saveState();
+      render();
+      alert("Progreso importado.");
     } else alert("JSON con formato inválido.");
   }catch(err){ alert("JSON inválido: " + err.message); }
 });
 
-/* modal */
+/* modal functions */
 function showModal(title,text){
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalText").textContent = text;
@@ -440,22 +467,24 @@ function showModal(title,text){
 }
 document.getElementById("modalClose").addEventListener("click", ()=>{ document.getElementById("modal").style.display = "none"; });
 
-/* year completion */
-let shownY1=false, shownY2=false;
+/* year completion notifications */
+let shownYear1=false, shownYear2=false;
 function checkYearCompletion(){
-  const y1 = ["electricidad","guion","medios","semiotica","arte_diseno","produccion_comunitaria","produccion_televisiva","fotografia","audiovisual_i"];
-  const y2 = ["estetica","sonido","derecho","realizacion","narrativa","edicion","audiovisual_ii"];
-  const done1 = y1.every(id=> approved.includes(id));
-  const done2 = y2.every(id=> approved.includes(id));
-  if(done1 && !shownY1){ shownY1=true; showModal("Primer año adentro!","¡Vamos que falta poco!"); }
-  if(done2 && !shownY2){ shownY2=true; showModal("Segundo año adentro!","¡El último esfuerzo, VOS PODÉS!"); }
-  if(!done1) shownY1=false;
-  if(!done2) shownY2=false;
+  const year1 = ["electricidad","guion","medios","semiotica","arte_diseno","produccion_comunitaria","produccion_televisiva","fotografia","audiovisual_i"];
+  const year2 = ["estetica","sonido","derecho","realizacion","narrativa","edicion","audiovisual_ii"];
+  const done1 = year1.every(id=> approved.includes(id));
+  const done2 = year2.every(id=> approved.includes(id));
+  if(done1 && !shownYear1){ shownYear1=true; showModal("¡Primer año adentro!", "¡Vamos que falta poco!"); }
+  if(done2 && !shownYear2){ shownYear2=true; showModal("¡Segundo años adentro!", "¡El último esfuerzo, VOS PODES!"); }
+  if(!done1) shownYear1=false;
+  if(!done2) shownYear2=false;
 }
 
-/* init */
-renderAll();
-if(approved.includes("tif")) setTimeout(()=> showModal("¡Felicidades, te recibiste!","Ya sos Productor/ra Audiovisual"), 300);
+/* initial render */
+(function init(){
+  render();
+  if(approved.includes("tif")) setTimeout(()=> showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual"), 300);
+})();
 </script>
 </body>
 </html>
