@@ -1,153 +1,156 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Malla — Tecnicatura en Producción Audiovisual (UNCUYO)</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --color1:#ffabab;
-  --color2:#ffdaab;
-  --color3:#ddffab;
-  --color4:#abe4ff;
-  --color5:#d9abff;
-  --accent:#2b2b2b;
-  --bg:#fffdfc;
-  --shadow: 0 18px 40px rgba(0,0,0,0.08);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-  background:linear-gradient(180deg,var(--bg),#ffffff);
-  color:var(--accent);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  padding:28px;
-  text-rendering:optimizeLegibility;
-}
+  :root{
+    --color1: #1c0b2b;
+    --color2: #301c41;
+    --color3: #413b6b;
+    --color4: #5c65c0;
+    --color5: #6f95ff;
 
-/* Container centered */
-.container{ max-width:1200px; margin:0 auto; text-align:center; }
+    --soft-1: #3b2843; /* softer when approved */
+    --soft-2: #4a3a63;
+    --soft-3: #6b68a3;
+    --soft-4: #8a93d6;
+    --soft-5: #b7c9ff;
 
-/* Header */
-h1{ margin:0; font-size:34px; color:var(--color5); }
-p.lead{ margin:8px 0 0; color:#444; font-size:16px }
+    --bg: #fbfcff;
+    --card-shadow: 0 18px 40px rgba(43,54,74,0.06);
+  }
 
-/* big rounded area containing years */
-.malla-box{
-  margin:22px auto;
-  padding:18px;
-  border-radius:16px;
-  background:linear-gradient(180deg,#fff,#fffaf7);
-  box-shadow:var(--shadow);
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  align-items:flex-start;
-  flex-wrap:wrap;
-}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg),#ffffff);
+    color:var(--color5);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:28px;
+  }
 
-/* each year as recuadro */
-.year{
-  width:340px;
-  background:linear-gradient(180deg,#ffffff,#fffefc);
-  border-radius:12px;
-  padding:16px;
-  text-align:left;
-  box-shadow:0 8px 26px rgba(0,0,0,0.05);
-  flex:0 0 auto;
-}
-.year h2{ margin:0 0 10px; font-size:20px; color:var(--color4); text-align:center; }
+  .container{ max-width:1240px; margin:0 auto; text-align:center; }
 
-/* blocks inside year (cuatrimestres / anuales) */
-.block{ margin-bottom:12px; padding:8px 0; border-radius:10px; background:transparent; }
-.block h3{ margin:0 0 8px; font-size:16px; color:#333; text-align:center; }
+  header h1{ margin:0; font-size:34px; color:var(--color5); }
+  header p{ margin:8px 0 0; color:#2b2b2b; font-size:16px }
 
-/* materia card */
-.subject{
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  padding:12px 14px; border-radius:10px; margin:8px 0;
-  background:linear-gradient(90deg,var(--color1),#fff);
-  border-left:8px solid var(--color3);
-  cursor:pointer; transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-  font-size:18px; font-weight:600; color:var(--accent);
-  position:relative;
-}
-.subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.06); }
+  .top-links{ margin-top:8px; font-size:14px }
+  .top-links a{ color:var(--color4); text-decoration:none; font-weight:600; }
 
-/* year-specific tints */
-.year1 .subject{ background:linear-gradient(90deg,var(--color1),#fff) }
-.year2 .subject{ background:linear-gradient(90deg,var(--color2),#fff) }
-.year3 .subject{ background:linear-gradient(90deg,var(--color3),#fff) }
+  /* malla recuadros centrada */
+  .malla-box{
+    margin:22px auto;
+    padding:18px;
+    border-radius:16px;
+    background:linear-gradient(180deg,#fff,#fffaf7);
+    box-shadow:var(--card-shadow);
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
 
-/* blocked: transparent look */
-.subject.bloqueada{
-  opacity:0.18; cursor:default; filter:grayscale(0.06); transform:none; box-shadow:none;
-}
+  .year{
+    width:340px;
+    background:linear-gradient(180deg,#ffffff,#fffefc);
+    border-radius:12px;
+    padding:16px;
+    text-align:left;
+    box-shadow:0 8px 26px rgba(0,0,0,0.04);
+    flex:0 0 auto;
+  }
+  .year h2{ margin:0 0 10px; font-size:20px; color:var(--color4); text-align:center; }
 
-/* tooltip for blocked */
-.subject.bloqueada[data-tooltip]:hover::after{
-  content: attr(data-tooltip);
-  position:absolute;
-  left:50%; transform:translateX(-50%);
-  bottom:calc(100% + 10px);
-  background:#111; color:#fff; padding:10px 12px; border-radius:8px;
-  white-space:pre-line; z-index:80; max-width:320px; text-align:left; font-size:14px;
-  box-shadow:0 12px 36px rgba(0,0,0,0.25);
-}
-.subject.bloqueada[data-tooltip]:hover::before{
-  content:""; position:absolute; left:50%; transform:translateX(-50%);
-  bottom:calc(100% + 4px); border:7px solid transparent; border-top-color:#111; z-index:81;
-}
+  .block{ margin-bottom:12px; padding:8px 0; border-radius:10px; background:transparent; }
+  .block h3{ margin:0 0 8px; font-size:16px; color:#333; text-align:center; }
 
-/* approved style */
-.subject.aprobada{
-  text-decoration:line-through; opacity:0.55; pointer-events:none;
-  background:linear-gradient(90deg,#fff,#f7ffef); border-left-color:var(--color4);
-  cursor:default;
-}
+  /* materia card: todas con color base var(--color3) y al aprobar -> soft */
+  .subject{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:12px 14px; border-radius:10px; margin:8px 0;
+    background: linear-gradient(90deg,var(--color3), #fff);
+    border-left:8px solid var(--color4);
+    cursor:pointer; transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease, background .18s ease;
+    font-size:18px; font-weight:700; color:var(--color5);
+    position:relative;
+  }
+  .subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.06); }
 
-/* practice box bottom, centered */
-.practice-wrap{ display:flex; justify-content:center; margin-top:22px }
-.practice-box{
-  width:920px; max-width:calc(100% - 40px); padding:16px; border-radius:12px;
-  background:linear-gradient(180deg,#fff,#fffefc); box-shadow:var(--shadow); text-align:center;
-}
-.practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
+  /* if you want year-specific tinting, you can change background by parent */
+  .year1 .subject{ background: linear-gradient(90deg,var(--color1), #fff); border-left-color:var(--color4); }
+  .year2 .subject{ background: linear-gradient(90deg,var(--color2), #fff); border-left-color:var(--color4); }
+  .year3 .subject{ background: linear-gradient(90deg,var(--color3), #fff); border-left-color:var(--color4); }
 
-/* progress */
-.progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
-.progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color3),var(--color4)); transition:width .45s ease }
+  /* blocked: transparent */
+  .subject.bloqueada{
+    opacity:0.18; cursor:default; filter:grayscale(0.06); transform:none; box-shadow:none;
+  }
 
-/* controls */
-.hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
-.hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e8e8e8; font-size:16px }
-.hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; font-weight:700; cursor:pointer }
+  /* tooltip for blocked */
+  .subject.bloqueada[data-tooltip]:hover::after{
+    content: attr(data-tooltip);
+    position:absolute;
+    left:50%; transform:translateX(-50%);
+    bottom:calc(100% + 10px);
+    background:#111; color:#fff; padding:10px 12px; border-radius:8px;
+    white-space:pre-line; z-index:80; max-width:320px; text-align:left; font-size:14px;
+    box-shadow:0 12px 36px rgba(0,0,0,0.25);
+  }
+  .subject.bloqueada[data-tooltip]:hover::before{
+    content:""; position:absolute; left:50%; transform:translateX(-50%);
+    bottom:calc(100% + 4px); border:7px solid transparent; border-top-color:#111; z-index:81;
+  }
 
-/* small helpers */
-.small{ font-size:13px; color:#444 }
+  /* approved: softer color and strike */
+  .subject.aprobada{
+    text-decoration:line-through;
+    opacity:0.65;
+    pointer-events:none;
+    background: linear-gradient(90deg,var(--soft-3), #fff);
+    border-left-color: var(--soft-4);
+    color:#ffffff;
+  }
 
-/* modal */
-.modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; }
-.modal-card{ background:#fff; padding:26px; border-radius:12px; width:92%; max-width:520px; text-align:center; box-shadow:0 26px 80px rgba(0,0,0,0.28) }
-.modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:22px }
-.modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
-.modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
+  /* practice box bottom */
+  .practice-wrap{ display:flex; justify-content:center; margin-top:22px }
+  .practice-box{
+    width:920px; max-width:calc(100% - 40px); padding:16px; border-radius:12px;
+    background:linear-gradient(180deg,#fff,#fffefc); box-shadow:var(--card-shadow); text-align:center;
+  }
+  .practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
 
-/* responsive */
-@media (max-width:1100px){
-  .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
-  .year{ width:92%; max-width:540px }
-  .practice-box{ width:92% }
-}
-@media (max-width:520px){
-  h1{ font-size:26px } .subject{ font-size:16px; padding:10px }
-  .hours-controls input{ width:120px }
-}
+  .progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color4),var(--color5)); transition:width .45s ease }
+
+  .hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
+  .hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e8e8e8; font-size:16px }
+  .hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; font-weight:700; cursor:pointer }
+
+  /* modal */
+  .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200 }
+  .modal-card{ background:#fff; padding:26px; border-radius:12px; width:92%; max-width:520px; text-align:center; box-shadow:0 26px 80px rgba(0,0,0,0.28) }
+  .modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:22px }
+  .modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
+  .modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
+
+  .controls { display:flex; gap:10px; justify-content:center; margin-top:10px; flex-wrap:wrap }
+
+  @media (max-width:1100px){
+    .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
+    .year{ width:92%; max-width:540px }
+    .practice-box{ width:92% }
+  }
+  @media (max-width:520px){
+    h1{ font-size:26px } .subject{ font-size:16px; padding:10px } .hours-controls input{ width:120px }
+  }
 </style>
 </head>
 <body>
@@ -155,13 +158,14 @@ p.lead{ margin:8px 0 0; color:#444; font-size:16px }
     <header>
       <h1>Malla — Tecnicatura Universitaria en Producción Audiovisual (UNCUYO)</h1>
       <p class="lead">Click en una materia para marcarla como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
+      <div class="top-links"><a href="/mnt/data/Correlativas TUPA (1).pdf" target="_blank">Ver correlativas (PDF)</a></div>
     </header>
 
     <div class="malla-box" role="region" aria-label="Malla curricular">
 
       <!-- PRIMER AÑO -->
-      <div class="year year1" aria-labelledby="y1">
-        <h2 id="y1">PRIMER AÑO</h2>
+      <div class="year year1">
+        <h2>PRIMER AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -182,8 +186,8 @@ p.lead{ margin:8px 0 0; color:#444; font-size:16px }
       </div>
 
       <!-- SEGUNDO AÑO -->
-      <div class="year year2" aria-labelledby="y2">
-        <h2 id="y2">SEGUNDO AÑO</h2>
+      <div class="year year2">
+        <h2>SEGUNDO AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -203,8 +207,8 @@ p.lead{ margin:8px 0 0; color:#444; font-size:16px }
       </div>
 
       <!-- TERCER AÑO -->
-      <div class="year year3" aria-labelledby="y3">
-        <h2 id="y3">TERCER AÑO</h2>
+      <div class="year year3">
+        <h2>TERCER AÑO</h2>
 
         <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -218,59 +222,52 @@ p.lead{ margin:8px 0 0; color:#444; font-size:16px }
       </div>
     </div>
 
-    <!-- practice box centered below -->
+    <!-- practice box -->
     <div class="practice-wrap">
       <div class="practice-box" role="region" aria-label="Prácticas profesionales">
         <div class="practice-title">Prácticas Profesionales — acreditan <strong>260 hs</strong></div>
-        <div class="small" style="margin-bottom:8px">Acumulá horas. Al alcanzar 260 hs, se habilita TIF (además deben aprobarse todas las materias).</div>
+        <div class="small" style="margin-bottom:8px">Acumulá horas; al alcanzar 260 hs y aprobar las materias, se habilita TIF.</div>
 
-        <div class="progress-bar" title="Horas acreditadas">
+        <div class="progress-bar">
           <div class="progress-fill" id="progressFill" style="width:0%"></div>
         </div>
 
         <div class="hours-controls" style="margin-top:12px">
-          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." aria-label="Agregar horas"/>
-          <button id="addHoursBtn" class="btn">Agregar horas</button>
+          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." />
+          <button id="addHoursBtn">Agregar horas</button>
           <div id="hoursText" style="font-weight:700; color:var(--color5); margin-left:10px">0 / 260 hs</div>
         </div>
 
-        <div style="margin-top:12px; display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap">
-          <button id="resetBtn" class="btn" style="background:#fff;border:1px solid #eee">Reiniciar progreso</button>
-          <button id="exportBtn" class="btn" style="background:#fff;border:1px solid #eee">Exportar progreso</button>
-          <button id="importBtn" class="btn" style="background:#fff;border:1px solid #eee">Importar progreso</button>
+        <div class="controls" style="margin-top:12px">
+          <button id="resetBtn" class="btn ghost">Reiniciar progreso</button>
+          <button id="exportBtn" class="btn ghost">Exportar progreso</button>
+          <button id="importBtn" class="btn ghost">Importar progreso</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- modal generic -->
-    <div id="modal" class="modal" style="display:none">
-      <div class="modal-card" role="dialog" aria-modal="true">
-        <h2 id="modalTitle">Título</h2>
-        <p id="modalText">Texto</p>
-        <button id="modalClose">Cerrar</button>
-      </div>
+  <!-- modal -->
+  <div id="modal" class="modal" style="display:none">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <button id="modalClose">Cerrar</button>
     </div>
-
   </div>
 
 <script>
-/* ----------------------------
-   Datos: prerrequisitos por id
-   ---------------------------- */
+/* Prerrequisitos */
 const prereqs = {
-  // 1er año
   "electricidad": [],
   "guion": [],
   "medios": [],
-
   "semiotica": ["medios"],
   "arte_diseno": ["guion"],
   "produccion_comunitaria": ["guion","medios"],
   "produccion_televisiva": ["electricidad","guion"],
   "fotografia": [],
   "audiovisual_i": [],
-
-  // 2do año
   "estetica": ["medios","semiotica"],
   "sonido": ["electricidad","guion"],
   "derecho": ["produccion_televisiva","audiovisual_i","produccion_comunitaria","estetica"],
@@ -278,20 +275,27 @@ const prereqs = {
   "narrativa": ["arte_diseno","fotografia","audiovisual_i"],
   "edicion": ["arte_diseno","fotografia","produccion_televisiva"],
   "audiovisual_ii": ["audiovisual_i","fotografia","produccion_televisiva","produccion_comunitaria","semiotica"],
-
   "ingles": ["narrativa","audiovisual_ii"],
   "direccion_arte": ["audiovisual_ii"],
   "electiva1": [],
   "electiva2": [],
   "audiovisual_iii": ["sonido","edicion","derecho"],
-
-  // TIF special
   "tif": []
 };
 
-/* helper human names */
+const allSubjects = Object.keys(prereqs).filter(id=>id!=="tif");
+
+/* localStorage keys */
+const LS_APPROVED = "malla_uncuyo_v_colors_approved";
+const LS_HOURS = "malla_uncuyo_v_colors_hours";
+
+/* load state */
+let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
+let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
+
+/* helpers */
 function human(id){
-  const m = {
+  const map = {
     electricidad:"Electricidad y Mantenimiento", guion:"Guion", medios:"Medios de Comunicación y Cultura",
     semiotica:"Semiótica", arte_diseno:"Arte y Diseño Digital", produccion_comunitaria:"Producción Comunitaria",
     produccion_televisiva:"Producción Televisiva", fotografia:"Fotografía, Iluminación y Cámara", audiovisual_i:"Audiovisual I",
@@ -300,36 +304,20 @@ function human(id){
     direccion_arte:"Dirección de arte y Ambientación", electiva1:"Electiva I", electiva2:"Electiva II", audiovisual_iii:"Audiovisual III",
     tif:"TIF (Trabajo Integrador Final)"
   };
-  return m[id] || id;
+  return map[id] || id;
 }
 
-/* all subject ids except TIF */
-const allSubjects = Object.keys(prereqs).filter(id=>id!=="tif");
-
-/* LOCALSTORAGE KEYS */
-const LS_APPROVED = "malla_uncuyo_approved_v_final";
-const LS_HOURS = "malla_uncuyo_hours_v_final";
-
-/* load */
-let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
-let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
-
-/* save */
-function saveState(){ localStorage.setItem(LS_APPROVED, JSON.stringify(approved)); localStorage.setItem(LS_HOURS, String(hours)); }
-
-/* unmet prereqs for id */
 function unmet(id){
   if(id==="tif"){
-    const missingSubjects = allSubjects.filter(sid => !approved.includes(sid));
-    const miss = [];
-    if(hours < 260) miss.push("260 hs de prácticas");
-    if(missingSubjects.length) miss.push("Aprobar todas las materias (faltan: " + missingSubjects.map(human).join(", ") + ")");
-    return miss;
+    const missing = allSubjects.filter(sid => !approved.includes(sid));
+    const arr = [];
+    if(hours < 260) arr.push("260 hs de prácticas");
+    if(missing.length) arr.push("Aprobar todas las materias (faltan: " + missing.map(human).join(", ") + ")");
+    return arr;
   }
   return (prereqs[id] || []).filter(r => !approved.includes(r)).map(human);
 }
 
-/* unlocked? */
 function unlocked(id){
   if(id==="tif"){
     return hours >= 260 && allSubjects.every(sid => approved.includes(sid));
@@ -337,8 +325,11 @@ function unlocked(id){
   return unmet(id).length === 0;
 }
 
-/* render subjects UI state */
-function render(){
+/* save */
+function saveState(){ localStorage.setItem(LS_APPROVED, JSON.stringify(approved)); localStorage.setItem(LS_HOURS, String(hours)); }
+
+/* render */
+function renderAll(){
   document.querySelectorAll(".subject").forEach(el=>{
     const id = el.dataset.id;
     el.classList.remove("bloqueada","aprobada");
@@ -352,21 +343,21 @@ function render(){
     }
   });
 
-  // progress
+  // progress UI
   const pct = Math.min(100, Math.round((hours/260)*100));
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("hoursText").textContent = hours + " / 260 hs";
 
-  // check year completion messages
+  // year completion messages
   checkYearCompletion();
 
-  // if tif approved show congrats modal
+  // if tif approved
   if(approved.includes("tif")){
     showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual");
   }
 }
 
-/* attach clicks (delegation style is simpler, but we attach here) */
+/* attach behavior */
 document.querySelectorAll(".subject").forEach(el=>{
   el.addEventListener("click", ()=>{
     const id = el.dataset.id;
@@ -375,24 +366,22 @@ document.querySelectorAll(".subject").forEach(el=>{
       return;
     }
     if(!approved.includes(id)){
-      // approving
       approved.push(id);
       saveState();
-      render();
+      renderAll();
       return;
     } else {
-      // un-approve with cascade
-      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'?\nSe desaprobarán las materias que dependan de ella.")){
+      if(confirm(`¿Desmarcar como aprobada '${human(id)}'? Se desaprobarán las materias que dependan de ella.`)){
         cascadeUnapprove(id);
         saveState();
-        render();
+        renderAll();
       }
     }
   });
   el.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" ") { e.preventDefault(); el.click(); } });
 });
 
-/* cascade unapprove recursivo */
+/* cascade unapprove */
 function cascadeUnapprove(id){
   approved = approved.filter(x=>x!==id);
   Object.keys(prereqs).forEach(k=>{
@@ -400,30 +389,29 @@ function cascadeUnapprove(id){
       cascadeUnapprove(k);
     }
   });
-  // if tif approved and now locked, remove it
+  // if tif now locked, remove
   if(approved.includes("tif") && !unlocked("tif")) approved = approved.filter(x=>x!=="tif");
 }
 
-/* Add hours */
+/* hours controls */
 document.getElementById("addHoursBtn").addEventListener("click", ()=>{
   const v = Number(document.getElementById("hoursInput").value || 0);
-  if(!v || v <= 0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
+  if(!v || v<=0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
   hours += v;
   if(hours < 0) hours = 0;
   saveState();
   document.getElementById("hoursInput").value = "";
-  render();
+  renderAll();
 });
 
-/* reset export import */
+/* export/import/reset */
 document.getElementById("resetBtn").addEventListener("click", ()=>{
   if(confirm("¿Seguro que querés reiniciar todo el progreso (aprobadas y horas)?")){
-    approved = []; hours = 0; saveState(); render();
+    approved = []; hours = 0; saveState(); renderAll();
   }
 });
 document.getElementById("exportBtn").addEventListener("click", async ()=>{
-  const data = { approved, hours };
-  const json = JSON.stringify(data);
+  const data = { approved, hours }; const json = JSON.stringify(data);
   try{ await navigator.clipboard.writeText(json); alert("Progreso copiado al portapapeles."); }
   catch(e){ prompt("Copia manualmente este JSON:", json); }
 });
@@ -439,54 +427,35 @@ document.getElementById("importBtn").addEventListener("click", ()=>{
         if(!confirm("Se encontraron IDs desconocidos: " + invalid.join(", ") + "\nSe ignorarán.")) return;
       }
       approved = parsed.approved.filter(x=>ids.includes(x));
-      hours = parsed.hours;
-      saveState();
-      render();
-      alert("Progreso importado.");
+      hours = parsed.hours; saveState(); renderAll(); alert("Progreso importado.");
     } else alert("JSON con formato inválido.");
   }catch(err){ alert("JSON inválido: " + err.message); }
 });
 
-/* modal utilities */
-function showModal(title, text){
+/* modal */
+function showModal(title,text){
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalText").textContent = text;
   document.getElementById("modal").style.display = "flex";
 }
 document.getElementById("modalClose").addEventListener("click", ()=>{ document.getElementById("modal").style.display = "none"; });
 
-/* year completion checks: when all subjects of year are approved, show message once */
-let shownYear1=false, shownYear2=false;
+/* year completion */
+let shownY1=false, shownY2=false;
 function checkYearCompletion(){
-  // year1 ids:
-  const year1 = ["electricidad","guion","medios","semiotica","arte_diseno","produccion_comunitaria","produccion_televisiva","fotografia","audiovisual_i"];
-  const year2 = ["estetica","sonido","derecho","realizacion","narrativa","edicion","audiovisual_ii"];
-  const done1 = year1.every(id=> approved.includes(id));
-  const done2 = year2.every(id=> approved.includes(id));
-  if(done1 && !shownYear1){
-    shownYear1 = true;
-    showModal("¡Primer año adentro!", "¡Vamos que falta poco!");
-  }
-  if(done2 && !shownYear2){
-    shownYear2 = true;
-    showModal("¡Segundo años adentro!", "¡El último esfuerzo, VOS PODÉS!");
-  }
-  // if user un-approves causing year incomplete, allow re-show later
-  if(!done1) shownYear1=false;
-  if(!done2) shownYear2=false;
+  const y1 = ["electricidad","guion","medios","semiotica","arte_diseno","produccion_comunitaria","produccion_televisiva","fotografia","audiovisual_i"];
+  const y2 = ["estetica","sonido","derecho","realizacion","narrativa","edicion","audiovisual_ii"];
+  const done1 = y1.every(id=> approved.includes(id));
+  const done2 = y2.every(id=> approved.includes(id));
+  if(done1 && !shownY1){ shownY1=true; showModal("Primer año adentro!","¡Vamos que falta poco!"); }
+  if(done2 && !shownY2){ shownY2=true; showModal("Segundo año adentro!","¡El último esfuerzo, VOS PODÉS!"); }
+  if(!done1) shownY1=false;
+  if(!done2) shownY2=false;
 }
 
-/* initial render: set tooltip etc */
-(function init(){
-  // set dataset ids in DOM are already present
-  render();
-  // if tif already approved show congrats
-  if(approved.includes("tif")) setTimeout(()=> showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual"), 300);
-})();
-</script>
-</body>
-</html>
-
+/* init */
+renderAll();
+if(approved.includes("tif")) setTimeout(()=> showModal("¡Felicidades, te recibiste!","Ya sos Productor/ra Audiovisual"), 300);
 </script>
 </body>
 </html>
