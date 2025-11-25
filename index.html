@@ -5,204 +5,166 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Malla — Tecnicatura en Producción Audiovisual (UNCUYO)</title>
 
-<!-- Fuente agradable -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --color1: #e0d1ed;
-    --color2: #f0b9cf;
-    --color3: #e63c80;
-    --color4: #c70452;
-    --color5: #4b004c;
-    --bg: #fff7fa;
-    --card-shadow: 0 12px 30px rgba(75,0,76,0.08);
+    --color1: #7375a5;
+    --color2: #21a3a3;
+    --color3: #13c8b5;
+    --color4: #6cf3d5;
+    --color5: #2b364a;
+    --bg: #fbfdff;
+    --card-shadow: 0 18px 40px rgba(43,54,74,0.08);
   }
-
-  *{ box-sizing: border-box; }
+  *{box-sizing:border-box}
   body{
     margin:0;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    background: linear-gradient(180deg, var(--bg), #fff);
-    color:#2b0b2b;
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg),#ffffff);
+    color:var(--color5);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    padding:28px;
+    padding:30px;
   }
-
-  /* Centered container */
   .container{
-    max-width:1200px;
+    max-width:1250px;
     margin:0 auto;
     text-align:center;
   }
+  header{ margin-bottom:20px }
+  h1{ margin:0; font-size:34px; color:var(--color5); }
+  p.lead{ margin:8px 0 0; color:#455; font-size:16px }
 
-  header{
-    margin-bottom:20px;
-  }
-  header h1{
-    margin:0; font-size:30px; color:var(--color5);
-    letter-spacing:0.2px;
-  }
-  header p{ margin:6px 0 0; color:#5b2a4f; font-size:15px }
-
-  /* Main grid: years inside a big rounded box */
+  /* malla recuadros centrada */
   .malla-box{
-    margin:20px auto 28px;
-    padding:18px;
-    border-radius:14px;
-    background: linear-gradient(180deg,#fff,#fffaf7);
-    box-shadow: var(--card-shadow);
     display:flex;
-    gap:18px;
+    gap:20px;
     justify-content:center;
     align-items:flex-start;
+    margin-top:22px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
   }
 
-  /* Year card (recuadro) */
-  .year{
-    width: 320px;
-    border-radius:12px;
-    padding:14px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,250,250,0.95));
-    box-shadow: 0 6px 18px rgba(75,0,76,0.05);
+  .year-card{
+    width:340px;
+    background:linear-gradient(180deg,#ffffff,#fbffff);
+    border-radius:14px;
+    padding:16px;
+    box-shadow:var(--card-shadow);
     text-align:left;
+    flex:0 0 auto;
   }
-  .year h2{
-    margin:0 0 12px; font-size:20px; color:var(--color4); text-align:center;
-  }
-
+  .year-card h2{ font-size:20px; margin:0 0 10px; color:var(--color5); text-align:center }
   .block{
-    background: rgba(255,255,255,0.9);
+    background:transparent;
+    padding:8px 0;
     border-radius:10px;
-    padding:10px;
-    margin-bottom:12px;
   }
-  .block h3{
-    margin:0 0 8px 0; font-size:16px; color:#401033; text-align:center;
-  }
+  .block h3{ margin:0 0 8px; font-size:16px; color:#2e3a45; text-align:center }
 
-  /* Subject card */
+  /* tarjeta materia */
   .subject{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:8px;
-    padding:10px 12px;
+    gap:10px;
+    padding:12px 14px;
     border-radius:10px;
     margin:8px 0;
-    background: linear-gradient(90deg,var(--color1), #fff);
+    background:linear-gradient(90deg,var(--color1), #ffffff);
     border-left:8px solid var(--color3);
     cursor:pointer;
     transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-    font-size:16px; /* larger text */
+    font-size:18px; /* letra grande */
     position:relative;
   }
-  .subject .title{ text-overflow:ellipsis; overflow:hidden; white-space:nowrap; font-weight:600; color:#3a0836 }
-  .subject:hover{ transform: translateY(-4px); box-shadow: 0 12px 30px rgba(75,0,76,0.06); }
+  .subject .title{ font-weight:600; color:var(--color5); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+  .subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(43,54,74,0.06) }
 
-  /* variations by section (soft differences) */
-  .year1 .subject{ background: linear-gradient(90deg,var(--color1), #fff); }
-  .year2 .subject{ background: linear-gradient(90deg,var(--color2), #fff); }
-  .year3 .subject{ background: linear-gradient(90deg,var(--color3), #fff); }
+  /* slight color variations per year */
+  .year1 .subject{ background:linear-gradient(90deg,var(--color1), #fff) }
+  .year2 .subject{ background:linear-gradient(90deg,var(--color2), #fff) }
+  .year3 .subject{ background:linear-gradient(90deg,var(--color3), #fff) }
 
-  /* blocked = transparent */
+  /* blocked -> transparent */
   .subject.bloqueada{
-    opacity:0.2;
-    cursor: default;
-    filter: grayscale(0.08);
+    opacity:0.18;
+    cursor:default;
+    filter:grayscale(0.05);
     transform:none;
     box-shadow:none;
   }
 
-  /* tooltip for blocked (custom) */
+  /* tooltip for blocked */
   .subject.bloqueada[data-tooltip]:hover::after{
     content: attr(data-tooltip);
     position:absolute;
     left:50%;
     transform:translateX(-50%);
-    bottom: calc(100% + 10px);
-    background: rgba(11,6,18,0.95);
-    color:#fff;
-    font-size:14px;
-    padding:8px 10px;
-    border-radius:8px;
-    white-space: pre-line;
-    z-index:60;
-    max-width:300px;
-    text-align:left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    bottom:calc(100% + 10px);
+    background:#17202a; color:#fff; font-size:14px;
+    padding:10px 12px; border-radius:10px;
+    white-space: pre-line; z-index:60; max-width:300px; text-align:left;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
   }
   .subject.bloqueada[data-tooltip]:hover::before{
     content:"";
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom: calc(100% + 4px);
-    border:7px solid transparent;
-    border-top-color: rgba(11,6,18,0.95);
+    position:absolute; left:50%; transform:translateX(-50%);
+    bottom:calc(100% + 4px);
+    border:7px solid transparent; border-top-color:#17202a; z-index:61;
   }
 
   /* approved: strike + diffused */
   .subject.aprobada{
-    text-decoration: line-through;
-    opacity:0.55;
-    background: linear-gradient(90deg,#fff,#fff);
-    border-left-color: var(--color4);
+    text-decoration:line-through;
+    opacity:0.5;
     pointer-events:none;
+    background:linear-gradient(90deg,#fff,#f7fffe);
+    border-left-color:var(--color4);
     cursor:default;
   }
 
   /* practice box centered under malla */
-  .practice-wrap{
-    margin-top:18px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    gap:12px;
-  }
+  .practice-wrap{ display:flex; justify-content:center; margin-top:22px }
   .practice-box{
-    width:900px;
-    max-width:calc(100% - 40px);
-    background: linear-gradient(180deg,#fff,#fffaf7);
-    padding:16px;
-    border-radius:12px;
-    box-shadow: var(--card-shadow);
+    width:920px; max-width: calc(100% - 40px);
+    border-radius:14px; padding:16px;
+    background:linear-gradient(180deg,#fff,#fbffff);
+    box-shadow:var(--card-shadow);
     text-align:center;
   }
-  .practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px 0 }
+  .practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
   .progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
-  .progress-fill{ height:100%; width:0%; background: linear-gradient(90deg,var(--color3),var(--color4)); transition: width .45s ease; }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color3),var(--color4)); transition:width .45s ease }
 
-  .hours-controls{ margin-top:12px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap }
-  .hours-controls input{ padding:8px 10px; width:160px; border-radius:8px; border:1px solid #e6d6e6; font-size:15px }
-  .hours-controls button{ padding:9px 12px; border-radius:8px; border:0; background:var(--color5); color:white; font-weight:700; cursor:pointer }
+  .hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
+  .hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e6eef0; font-size:16px }
+  .hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:white; font-weight:700; cursor:pointer; font-size:15px }
 
-  /* modal congratulations centered */
-  .modal{
-    position:fixed; left:0; top:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.45);
-    display:flex; align-items:center; justify-content:center;
-    z-index:120;
-  }
-  .modal-card{
-    background: #fff; padding:26px 28px; border-radius:12px; text-align:center; width:90%; max-width:520px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-  .modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:22px }
-  .modal-card p{ margin:0 0 16px; color:#333; font-size:16px }
-  .modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; font-weight:700; cursor:pointer }
+  /* modal centered for congrats */
+  .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(11,12,14,0.45); z-index:200 }
+  .modal-card{ background:#fff; padding:26px 28px; border-radius:12px; text-align:center; width:92%; max-width:520px; box-shadow:0 26px 80px rgba(43,54,74,0.3) }
+  .modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:24px }
+  .modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
+  .modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
+
+  /* controls */
+  .controls{ display:flex; gap:10px; justify-content:center; margin-top:6px; flex-wrap:wrap }
+  .btn{ padding:10px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:700 }
+  .btn.ghost{ background:#fff; border:1px solid #eee; color:var(--color5) }
 
   /* responsive */
   @media (max-width:1100px){
-    .malla-box{ flex-direction:column; align-items:center; gap:12px; padding:12px }
-    .year{ width: 92%; max-width:420px; }
+    .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
+    .year-card{ width:92%; max-width:540px }
     .practice-box{ width:92% }
   }
   @media (max-width:520px){
-    .subject{ font-size:15px; padding:8px }
-    header h1{ font-size:22px }
+    h1{ font-size:26px }
+    .subject{ font-size:16px; padding:10px }
+    .hours-controls input{ width:120px }
   }
 </style>
 </head>
@@ -210,14 +172,14 @@
   <div class="container">
     <header>
       <h1>Malla — Tecnicatura Universitaria en Producción Audiovisual (UNCUYO)</h1>
-      <p style="margin-top:8px">Click en una materia para marcarla como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
+      <p class="lead">Click para marcar una materia como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
+      <div style="margin-top:8px"><a href="/mnt/data/Correlativas TUPA (1).pdf" target="_blank" style="color:var(--color3); font-weight:600; text-decoration:none">Ver correlativas (PDF)</a></div>
     </header>
 
-    <!-- big box with years -->
     <div class="malla-box" role="region" aria-label="Malla curricular">
-      <!-- YEAR 1 -->
-      <div class="year year1" aria-labelledby="year1title">
-        <h2 id="year1title">MATERIAS PRIMER AÑO</h2>
+      <!-- PRIMER AÑO -->
+      <div class="year-card year1" aria-labelledby="y1">
+        <h2 id="y1">PRIMER AÑO</h2>
 
         <div class="block block1">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -237,9 +199,9 @@
         </div>
       </div>
 
-      <!-- YEAR 2 -->
-      <div class="year year2" aria-labelledby="year2title">
-        <h2 id="year2title">MATERIAS SEGUNDO AÑO</h2>
+      <!-- SEGUNDO AÑO -->
+      <div class="year-card year2" aria-labelledby="y2">
+        <h2 id="y2">SEGUNDO AÑO</h2>
 
         <div class="block block1">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -257,9 +219,9 @@
         </div>
       </div>
 
-      <!-- YEAR 3 -->
-      <div class="year year3" aria-labelledby="year3title">
-        <h2 id="year3title">MATERIAS TERCER AÑO</h2>
+      <!-- TERCER AÑO -->
+      <div class="year-card year3" aria-labelledby="y3">
+        <h2 id="y3">TERCER AÑO</h2>
 
         <div class="block block1">
           <h3>PRIMER CUATRIMESTRE</h3>
@@ -271,60 +233,62 @@
         </div>
 
         <div class="block blockA">
-          <h3>Anual</h3>
+          <h3>TIF (Trabajo Integrador Final)</h3>
           <div class="subject" data-id="tif"><div class="title">TIF (Trabajo Integrador Final)</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Practice box centered below -->
+    <!-- practice box centered below -->
     <div class="practice-wrap" aria-hidden="false">
       <div class="practice-box" role="region" aria-label="Prácticas profesionales">
-        <div class="practice-title">Prácticas Profesionales (acreditan 260 hs)</div>
-        <div class="small" style="margin-bottom:8px">Acumulá horas y al alcanzar 260 hs se habilita TIF (además TIF exige tener aprobadas todas las materias).</div>
+        <div class="practice-title">Prácticas Profesionales — acreditan <strong>260 hs</strong></div>
+        <div class="small" style="color:#475; margin-bottom:8px">Acumulá horas y al alcanzar 260 hs se habilita TIF (además se deben aprobar todas las materias).</div>
 
         <div class="progress-bar" aria-hidden="false" title="Horas acreditadas">
           <div class="progress-fill" id="progressFill" style="width:0%"></div>
         </div>
 
-        <div style="margin-top:10px; display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap">
-          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." style="padding:8px 10px; width:160px; border-radius:8px; border:1px solid #eee; font-size:15px" />
-          <button id="addHoursBtn" class="btn" style="background:var(--color5); color:#fff; border-radius:8px; padding:10px 14px; font-weight:700; cursor:pointer">Agregar horas</button>
-          <div id="hoursText" style="font-weight:700; color:#3b0a3b; font-size:15px"></div>
+        <div class="hours-controls" style="margin-top:12px">
+          <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." aria-label="Agregar horas"/>
+          <button id="addHoursBtn" class="btn">Agregar horas</button>
+          <div id="hoursText" style="font-weight:700; color:var(--color5); margin-left:10px"></div>
+        </div>
+
+        <div class="controls" style="margin-top:12px">
+          <button id="resetBtn" class="btn ghost">Reiniciar progreso</button>
+          <button id="exportBtn" class="btn ghost">Exportar progreso</button>
+          <button id="importBtn" class="btn ghost">Importar progreso</button>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <!-- modal for graduation -->
-  <div id="modalCongrats" class="modal" style="display:none">
-    <div class="modal-card" role="dialog" aria-modal="true">
-      <h2>¡Felicidades, te recibiste!</h2>
-      <p>Ya sos <strong>Productor/ra Audiovisual</strong>.</p>
-      <button id="closeModalBtn">Cerrar</button>
+    <!-- modal congrats -->
+    <div id="modalCongrats" class="modal" style="display:none">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <h2>¡Felicidades, te recibiste!</h2>
+        <p>Ya sos <strong>Productor/ra Audiovisual</strong>.</p>
+        <button id="closeModalBtn">Cerrar</button>
+      </div>
     </div>
   </div>
 
 <script>
-/* -------------------------
-   Datos: prerequisitos por id
-   ------------------------- */
+/* ------------------------
+   Prerrequisitos (ids)
+   ------------------------ */
 const prereqs = {
-  // primer año
   "electricidad": [],
   "guion": [],
   "medios": [],
 
-  // segundo cuatri del 1° año
   "semiotica": ["medios"],
   "arte_diseno": ["guion"],
   "produccion_comunitaria": ["guion","medios"],
   "produccion_televisiva": ["electricidad","guion"],
-  "fotografia": [], // anual
+  "fotografia": [],
   "audiovisual_i": [],
 
-  // segundo año
   "estetica": ["medios","semiotica"],
   "sonido": ["electricidad","guion"],
   "derecho": ["produccion_televisiva","audiovisual_i","produccion_comunitaria","estetica"],
@@ -333,137 +297,105 @@ const prereqs = {
   "edicion": ["arte_diseno","fotografia","produccion_televisiva"],
   "audiovisual_ii": ["audiovisual_i","fotografia","produccion_televisiva","produccion_comunitaria","semiotica"],
 
-  // tercer año
   "ingles": ["narrativa","audiovisual_ii"],
   "direccion_arte": ["audiovisual_ii"],
   "electiva1": [],
   "electiva2": [],
   "audiovisual_iii": ["sonido","edicion","derecho"],
 
-  // TIF handled differently (hours + all subjects approved)
+  // TIF handled separately
   "tif": []
 };
 
-/* list of all subject ids to check for TIF completeness */
-const allSubjectIds = Object.keys(prereqs).filter(id => id !== "tif");
+const allSubjects = Object.keys(prereqs).filter(id => id !== "tif");
 
 /* localStorage keys */
-const LS_APPROVED = "malla_uncuyo_v3_approved";
-const LS_HOURS    = "malla_uncuyo_v3_hours";
+const LS_APPROVED = "malla_uncuyo_approved_v4";
+const LS_HOURS = "malla_uncuyo_hours_v4";
 
 /* load state */
 let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
 let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
 
-/* helpers */
 function saveState(){
   localStorage.setItem(LS_APPROVED, JSON.stringify(approved));
   localStorage.setItem(LS_HOURS, String(hours));
 }
 
-/* determine unmet prereqs list for id */
+/* helpers */
+function human(id){
+  const map = {
+    "electricidad":"Electricidad y Mantenimiento","guion":"Guion","medios":"Medios de Comunicación y Cultura",
+    "semiotica":"Semiótica","arte_diseno":"Arte y Diseño Digital","produccion_comunitaria":"Producción Comunitaria",
+    "produccion_televisiva":"Producción Televisiva","fotografia":"Fotografía, Iluminación y Cámara","audiovisual_i":"Audiovisual I",
+    "estetica":"Estética Audiovisual","sonido":"Sonido","derecho":"Derecho Audiovisual","realizacion":"Realización Audiovisual",
+    "narrativa":"Narrativa Transmedia","edicion":"Edición","audiovisual_ii":"Audiovisual II","ingles":"Inglés",
+    "direccion_arte":"Dirección de arte y Ambientación","electiva1":"Electiva I","electiva2":"Electiva II","audiovisual_iii":"Audiovisual III",
+    "tif":"TIF (Trabajo Integrador Final)"
+  };
+  return map[id] || id;
+}
 function unmet(id){
   if(id === "tif"){
-    // TIF requires hours >=260 AND all other subjects approved
-    const missingSubjects = allSubjectIds.filter(sid => !approved.includes(sid));
-    const missing = [];
-    if(hours < 260) missing.push("260 hs de prácticas");
-    if(missingSubjects.length) missing.push("Aprobar todas las materias (faltan: " + missingSubjects.map(x=>human(x)).join(", ") + ")");
-    return missing;
+    const missingSubjects = allSubjects.filter(sid => !approved.includes(sid));
+    const miss = [];
+    if(hours < 260) miss.push("260 hs de prácticas");
+    if(missingSubjects.length) miss.push("Aprobar todas las materias (faltan: " + missingSubjects.map(human).join(", ") + ")");
+    return miss;
   }
-  const list = prereqs[id] || [];
-  return list.filter(r => !approved.includes(r)).map(x => human(x));
+  return (prereqs[id] || []).filter(r => !approved.includes(r)).map(human);
 }
-
-/* is unlocked */
 function unlocked(id){
   if(id === "tif"){
-    return hours >= 260 && allSubjectIds.every(sid => approved.includes(sid));
+    return hours >= 260 && allSubjects.every(sid => approved.includes(sid));
   }
   return unmet(id).length === 0;
 }
 
-/* human-readable mapping for ids used in messages */
-function human(id){
-  const mapping = {
-    "electricidad":"Electricidad y Mantenimiento",
-    "guion":"Guion",
-    "medios":"Medios de Comunicación y Cultura",
-    "semiotica":"Semiótica",
-    "arte_diseno":"Arte y Diseño Digital",
-    "produccion_comunitaria":"Producción Comunitaria",
-    "produccion_televisiva":"Producción Televisiva",
-    "fotografia":"Fotografía, Iluminación y Cámara",
-    "audiovisual_i":"Audiovisual I",
-    "estetica":"Estética Audiovisual",
-    "sonido":"Sonido",
-    "derecho":"Derecho Audiovisual",
-    "realizacion":"Realización Audiovisual",
-    "narrativa":"Narrativa Transmedia",
-    "edicion":"Edición",
-    "audiovisual_ii":"Audiovisual II",
-    "ingles":"Inglés",
-    "direccion_arte":"Dirección de arte y Ambientación",
-    "electiva1":"Electiva I",
-    "electiva2":"Electiva II",
-    "audiovisual_iii":"Audiovisual III",
-    "tif":"TIF (Trabajo Integrador Final)"
-  };
-  return mapping[id] || id;
-}
-
-/* render subjects state */
+/* render all subject boxes */
 function render(){
-  // iterate all subject elements
   document.querySelectorAll(".subject").forEach(el=>{
     const id = el.dataset.id;
     el.classList.remove("bloqueada","aprobada");
     el.removeAttribute("data-tooltip");
-
     if(approved.includes(id)){
       el.classList.add("aprobada");
     } else if(!unlocked(id)){
       el.classList.add("bloqueada");
       const list = unmet(id);
-      el.setAttribute("data-tooltip", list.join("\\n"));
-    } else {
-      // unlocked and not approved => normal
+      el.setAttribute("data-tooltip", list.join("\n"));
     }
   });
 
-  // update progress bar and text
+  // progress fill and text
   const pct = Math.min(100, Math.round((hours/260)*100));
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("hoursText").textContent = hours + " / 260 hs";
 
-  // if hours >= 260 and all subjects approved (except tif), enable tif visually (render will handle)
+  // if tif was approved -> show modal
   if(approved.includes("tif")){
     showCongratsModal();
   }
 }
 
-/* event handlers: click on subject */
+/* attach click behavior to each subject */
 document.querySelectorAll(".subject").forEach(el=>{
   el.addEventListener("click", ()=>{
     const id = el.dataset.id;
-    // show prereq tooltip via side or alert when clicking blocked? spec wants tooltip on hover; clicking blocked shows nothing else
     if(!unlocked(id)){
-      // optionally show the tooltip content as alert for accessibility
-      const list = unmet(id);
-      // focus on element and return
+      // just focus (tooltip shows on hover)
       el.focus();
       return;
     }
-    // if unlocked and not approved: approve on click (except tif needs special confirm)
     if(!approved.includes(id)){
+      // approving
       if(id === "tif"){
-        // double-check: all other subjects approved and hours >=260
-        const missing = unmet(id);
+        // final checks
+        const missing = unmet("tif");
         if(missing.length){
-          alert("Aún no podés aprobar TIF. Faltan:\\n" + missing.join("\\n"));
+          alert("No podés aprobar TIF todavía. Faltan:\n" + missing.join("\n"));
           return;
         }
-        // mark TIF approved and show congrats
         approved.push(id);
         saveState();
         render();
@@ -476,119 +408,84 @@ document.querySelectorAll(".subject").forEach(el=>{
         return;
       }
     } else {
-      // if approved, allow un-approve with confirmation, cascade unapprove dependents
-      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'?\\nSe desaprobarán también las materias que dependan de ella.")){
+      // allow un-approve with cascade
+      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'? Se desaprobarán también las materias que dependan de ella.")){
         cascadeUnapprove(id);
         saveState();
         render();
       }
     }
   });
-
-  // keyboard support
-  el.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter" || e.key === " "){
-      e.preventDefault(); el.click();
-    }
-  });
+  el.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" ") { e.preventDefault(); el.click(); } });
 });
 
-/* cascade unapprove (recursivo) */
+/* cascade unapprove */
 function cascadeUnapprove(id){
   approved = approved.filter(x=>x!==id);
-  // find dependents (subjects that list id in prereqs)
   Object.keys(prereqs).forEach(k=>{
-    const arr = prereqs[k] || [];
-    if(arr.includes(id) && approved.includes(k)){
+    if((prereqs[k]||[]).includes(id) && approved.includes(k)){
       cascadeUnapprove(k);
     }
   });
-  // also if tif approved and you unapprove something, tif must be removed
-  if(approved.includes("tif")){
-    if(!unlocked("tif")) approved = approved.filter(x=>x!=="tif");
-  }
+  if(approved.includes("tif") && !unlocked("tif")) approved = approved.filter(x=>x!=="tif");
 }
 
-/* hours management */
+/* hours controls */
 document.getElementById("addHoursBtn").addEventListener("click", ()=>{
-  const val = Number(document.getElementById("hoursInput").value || 0);
-  if(!val || val <= 0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
-  hours += val;
+  const v = Number(document.getElementById("hoursInput").value || 0);
+  if(!v || v <= 0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
+  hours += v;
   if(hours < 0) hours = 0;
   saveState();
   document.getElementById("hoursInput").value = "";
   render();
 });
 
-/* reset / export / import control */
-function resetAll(){
-  if(!confirm("¿Seguro que querés reiniciar todo el progreso (aprobadas y horas)?")) return;
-  approved = [];
-  hours = 0;
-  saveState();
-  render();
-}
-document.getElementById("resetBtn")?.addEventListener("click", resetAll);
-
-document.getElementById("exportBtn")?.addEventListener("click", async ()=>{
-  const data = { approved, hours };
-  const json = JSON.stringify(data);
-  try{
-    await navigator.clipboard.writeText(json);
-    alert("Progreso copiado al portapapeles.");
-  }catch(e){
-    prompt("Copia manualmente este JSON:", json);
+/* reset / export / import */
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  if(confirm("¿Seguro que querés reiniciar todo el progreso (aprobadas y horas)?")){
+    approved = []; hours = 0; saveState(); render();
   }
 });
-
-document.getElementById("importBtn")?.addEventListener("click", ()=>{
+document.getElementById("exportBtn").addEventListener("click", async ()=>{
+  const data = { approved, hours };
+  const json = JSON.stringify(data);
+  try{ await navigator.clipboard.writeText(json); alert("Progreso copiado al portapapeles."); }
+  catch(e){ prompt("Copia manualmente este JSON:", json); }
+});
+document.getElementById("importBtn").addEventListener("click", ()=>{
   const txt = prompt("Pega aquí el JSON exportado (ej: {\"approved\":[\"guion\"],\"hours\":120})");
   if(!txt) return;
   try{
     const parsed = JSON.parse(txt);
     if(Array.isArray(parsed.approved) && typeof parsed.hours === "number"){
-      // validate ids
       const ids = Object.keys(prereqs).concat(["tif"]);
       const invalid = parsed.approved.filter(x=>!ids.includes(x));
       if(invalid.length){
-        if(!confirm("Se encontraron IDs desconocidos: " + invalid.join(", ") + "\\nSe ignorarán.")) return;
+        if(!confirm("Se encontraron IDs desconocidos: " + invalid.join(", ") + "\nSe ignorarán.")) return;
       }
       approved = parsed.approved.filter(x=>ids.includes(x));
       hours = parsed.hours;
       saveState();
       render();
       alert("Progreso importado.");
-    } else {
-      alert("JSON con formato inválido.");
-    }
-  }catch(err){
-    alert("JSON inválido: " + err.message);
-  }
+    } else alert("JSON con formato inválido.");
+  }catch(err){ alert("JSON inválido: " + err.message); }
 });
 
-/* modal handling */
-function showCongratsModal(){
-  document.getElementById("modalCongrats").style.display = "flex";
-}
-document.getElementById("closeModalBtn").addEventListener("click", ()=>{
-  document.getElementById("modalCongrats").style.display = "none";
-});
+/* modal */
+function showCongratsModal(){ document.getElementById("modalCongrats").style.display = "flex"; }
+document.getElementById("closeModalBtn").addEventListener("click", ()=>{ document.getElementById("modalCongrats").style.display = "none"; });
 
-/* initial load: set subject titles and IDs already in HTML; if any subject missing in DOM, ignore */
-function initSubjectsFromDOM(){
-  // ensure all subjects present have event listeners (we attached earlier by selecting .subject but DOM existed earlier)
-  // nothing extra needed here for dynamic content because HTML contained nodes.
-}
-initSubjectsFromDOM();
+/* initial render */
+render();
 
-/* initial render state */
-(function(){
-  // ensure if TIF approved in storage, congrats shows
-  if(approved.includes("tif")){
-    setTimeout(showCongratsModal, 300);
-  }
-  render();
-})();
+/* if tif already approved on load, show modal */
+if(approved.includes("tif")) setTimeout(showCongratsModal, 300);
+</script>
+</body>
+</html>
+
 
 </script>
 </body>
