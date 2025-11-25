@@ -1,194 +1,176 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Malla — Tecnicatura en Producción Audiovisual (UNCUYO)</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --color1: #7375a5;
-    --color2: #21a3a3;
-    --color3: #13c8b5;
-    --color4: #6cf3d5;
-    --color5: #2b364a;
-    --bg: #fbfdff;
-    --card-shadow: 0 18px 40px rgba(43,54,74,0.08);
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-    background: linear-gradient(180deg,var(--bg),#ffffff);
-    color:var(--color5);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:30px;
-  }
-  .container{
-    max-width:1250px;
-    margin:0 auto;
-    text-align:center;
-  }
-  header{ margin-bottom:20px }
-  h1{ margin:0; font-size:34px; color:var(--color5); }
-  p.lead{ margin:8px 0 0; color:#455; font-size:16px }
+:root{
+  --color1:#ffabab;
+  --color2:#ffdaab;
+  --color3:#ddffab;
+  --color4:#abe4ff;
+  --color5:#d9abff;
+  --accent:#2b2b2b;
+  --bg:#fffdfc;
+  --shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:linear-gradient(180deg,var(--bg),#ffffff);
+  color:var(--accent);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:28px;
+  text-rendering:optimizeLegibility;
+}
 
-  /* malla recuadros centrada */
-  .malla-box{
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    align-items:flex-start;
-    margin-top:22px;
-    margin-bottom:18px;
-    flex-wrap:wrap;
-  }
+/* Container centered */
+.container{ max-width:1200px; margin:0 auto; text-align:center; }
 
-  .year-card{
-    width:340px;
-    background:linear-gradient(180deg,#ffffff,#fbffff);
-    border-radius:14px;
-    padding:16px;
-    box-shadow:var(--card-shadow);
-    text-align:left;
-    flex:0 0 auto;
-  }
-  .year-card h2{ font-size:20px; margin:0 0 10px; color:var(--color5); text-align:center }
-  .block{
-    background:transparent;
-    padding:8px 0;
-    border-radius:10px;
-  }
-  .block h3{ margin:0 0 8px; font-size:16px; color:#2e3a45; text-align:center }
+/* Header */
+h1{ margin:0; font-size:34px; color:var(--color5); }
+p.lead{ margin:8px 0 0; color:#444; font-size:16px }
 
-  /* tarjeta materia */
-  .subject{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:12px 14px;
-    border-radius:10px;
-    margin:8px 0;
-    background:linear-gradient(90deg,var(--color1), #ffffff);
-    border-left:8px solid var(--color3);
-    cursor:pointer;
-    transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-    font-size:18px; /* letra grande */
-    position:relative;
-  }
-  .subject .title{ font-weight:600; color:var(--color5); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
-  .subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(43,54,74,0.06) }
+/* big rounded area containing years */
+.malla-box{
+  margin:22px auto;
+  padding:18px;
+  border-radius:16px;
+  background:linear-gradient(180deg,#fff,#fffaf7);
+  box-shadow:var(--shadow);
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
 
-  /* slight color variations per year */
-  .year1 .subject{ background:linear-gradient(90deg,var(--color1), #fff) }
-  .year2 .subject{ background:linear-gradient(90deg,var(--color2), #fff) }
-  .year3 .subject{ background:linear-gradient(90deg,var(--color3), #fff) }
+/* each year as recuadro */
+.year{
+  width:340px;
+  background:linear-gradient(180deg,#ffffff,#fffefc);
+  border-radius:12px;
+  padding:16px;
+  text-align:left;
+  box-shadow:0 8px 26px rgba(0,0,0,0.05);
+  flex:0 0 auto;
+}
+.year h2{ margin:0 0 10px; font-size:20px; color:var(--color4); text-align:center; }
 
-  /* blocked -> transparent */
-  .subject.bloqueada{
-    opacity:0.18;
-    cursor:default;
-    filter:grayscale(0.05);
-    transform:none;
-    box-shadow:none;
-  }
+/* blocks inside year (cuatrimestres / anuales) */
+.block{ margin-bottom:12px; padding:8px 0; border-radius:10px; background:transparent; }
+.block h3{ margin:0 0 8px; font-size:16px; color:#333; text-align:center; }
 
-  /* tooltip for blocked */
-  .subject.bloqueada[data-tooltip]:hover::after{
-    content: attr(data-tooltip);
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:calc(100% + 10px);
-    background:#17202a; color:#fff; font-size:14px;
-    padding:10px 12px; border-radius:10px;
-    white-space: pre-line; z-index:60; max-width:300px; text-align:left;
-    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
-  }
-  .subject.bloqueada[data-tooltip]:hover::before{
-    content:"";
-    position:absolute; left:50%; transform:translateX(-50%);
-    bottom:calc(100% + 4px);
-    border:7px solid transparent; border-top-color:#17202a; z-index:61;
-  }
+/* materia card */
+.subject{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:12px 14px; border-radius:10px; margin:8px 0;
+  background:linear-gradient(90deg,var(--color1),#fff);
+  border-left:8px solid var(--color3);
+  cursor:pointer; transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+  font-size:18px; font-weight:600; color:var(--accent);
+  position:relative;
+}
+.subject:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.06); }
 
-  /* approved: strike + diffused */
-  .subject.aprobada{
-    text-decoration:line-through;
-    opacity:0.5;
-    pointer-events:none;
-    background:linear-gradient(90deg,#fff,#f7fffe);
-    border-left-color:var(--color4);
-    cursor:default;
-  }
+/* year-specific tints */
+.year1 .subject{ background:linear-gradient(90deg,var(--color1),#fff) }
+.year2 .subject{ background:linear-gradient(90deg,var(--color2),#fff) }
+.year3 .subject{ background:linear-gradient(90deg,var(--color3),#fff) }
 
-  /* practice box centered under malla */
-  .practice-wrap{ display:flex; justify-content:center; margin-top:22px }
-  .practice-box{
-    width:920px; max-width: calc(100% - 40px);
-    border-radius:14px; padding:16px;
-    background:linear-gradient(180deg,#fff,#fbffff);
-    box-shadow:var(--card-shadow);
-    text-align:center;
-  }
-  .practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
-  .progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
-  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color3),var(--color4)); transition:width .45s ease }
+/* blocked: transparent look */
+.subject.bloqueada{
+  opacity:0.18; cursor:default; filter:grayscale(0.06); transform:none; box-shadow:none;
+}
 
-  .hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
-  .hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e6eef0; font-size:16px }
-  .hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:white; font-weight:700; cursor:pointer; font-size:15px }
+/* tooltip for blocked */
+.subject.bloqueada[data-tooltip]:hover::after{
+  content: attr(data-tooltip);
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:calc(100% + 10px);
+  background:#111; color:#fff; padding:10px 12px; border-radius:8px;
+  white-space:pre-line; z-index:80; max-width:320px; text-align:left; font-size:14px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.25);
+}
+.subject.bloqueada[data-tooltip]:hover::before{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:calc(100% + 4px); border:7px solid transparent; border-top-color:#111; z-index:81;
+}
 
-  /* modal centered for congrats */
-  .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(11,12,14,0.45); z-index:200 }
-  .modal-card{ background:#fff; padding:26px 28px; border-radius:12px; text-align:center; width:92%; max-width:520px; box-shadow:0 26px 80px rgba(43,54,74,0.3) }
-  .modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:24px }
-  .modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
-  .modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
+/* approved style */
+.subject.aprobada{
+  text-decoration:line-through; opacity:0.55; pointer-events:none;
+  background:linear-gradient(90deg,#fff,#f7ffef); border-left-color:var(--color4);
+  cursor:default;
+}
 
-  /* controls */
-  .controls{ display:flex; gap:10px; justify-content:center; margin-top:6px; flex-wrap:wrap }
-  .btn{ padding:10px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:700 }
-  .btn.ghost{ background:#fff; border:1px solid #eee; color:var(--color5) }
+/* practice box bottom, centered */
+.practice-wrap{ display:flex; justify-content:center; margin-top:22px }
+.practice-box{
+  width:920px; max-width:calc(100% - 40px); padding:16px; border-radius:12px;
+  background:linear-gradient(180deg,#fff,#fffefc); box-shadow:var(--shadow); text-align:center;
+}
+.practice-title{ font-size:18px; color:var(--color5); margin:0 0 6px }
 
-  /* responsive */
-  @media (max-width:1100px){
-    .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
-    .year-card{ width:92%; max-width:540px }
-    .practice-box{ width:92% }
-  }
-  @media (max-width:520px){
-    h1{ font-size:26px }
-    .subject{ font-size:16px; padding:10px }
-    .hours-controls input{ width:120px }
-  }
+/* progress */
+.progress-bar{ width:100%; height:20px; background:#f3f3f3; border-radius:12px; overflow:hidden; border:1px solid #eee }
+.progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--color3),var(--color4)); transition:width .45s ease }
+
+/* controls */
+.hours-controls{ display:flex; gap:10px; justify-content:center; align-items:center; margin-top:10px; flex-wrap:wrap }
+.hours-controls input{ padding:10px; width:160px; border-radius:10px; border:1px solid #e8e8e8; font-size:16px }
+.hours-controls button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; font-weight:700; cursor:pointer }
+
+/* small helpers */
+.small{ font-size:13px; color:#444 }
+
+/* modal */
+.modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; }
+.modal-card{ background:#fff; padding:26px; border-radius:12px; width:92%; max-width:520px; text-align:center; box-shadow:0 26px 80px rgba(0,0,0,0.28) }
+.modal-card h2{ margin:0 0 10px; color:var(--color4); font-size:22px }
+.modal-card p{ margin:0 0 14px; color:#333; font-size:16px }
+.modal-card button{ padding:10px 14px; border-radius:10px; border:0; background:var(--color5); color:#fff; cursor:pointer; font-weight:700 }
+
+/* responsive */
+@media (max-width:1100px){
+  .malla-box{ flex-direction:column; align-items:center; gap:14px; padding-bottom:12px }
+  .year{ width:92%; max-width:540px }
+  .practice-box{ width:92% }
+}
+@media (max-width:520px){
+  h1{ font-size:26px } .subject{ font-size:16px; padding:10px }
+  .hours-controls input{ width:120px }
+}
 </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Malla — Tecnicatura Universitaria en Producción Audiovisual (UNCUYO)</h1>
-      <p class="lead">Click para marcar una materia como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
-      <div style="margin-top:8px"><a href="/mnt/data/Correlativas TUPA (1).pdf" target="_blank" style="color:var(--color3); font-weight:600; text-decoration:none">Ver correlativas (PDF)</a></div>
+      <p class="lead">Click en una materia para marcarla como aprobada. Materias dependientes aparecen transparentes hasta cumplir requisitos.</p>
     </header>
 
     <div class="malla-box" role="region" aria-label="Malla curricular">
+
       <!-- PRIMER AÑO -->
-      <div class="year-card year1" aria-labelledby="y1">
+      <div class="year year1" aria-labelledby="y1">
         <h2 id="y1">PRIMER AÑO</h2>
 
-        <div class="block block1">
+        <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
           <div class="subject" data-id="electricidad"><div class="title">Electricidad y Mantenimiento</div></div>
           <div class="subject" data-id="guion"><div class="title">Guion</div></div>
           <div class="subject" data-id="medios"><div class="title">Medios de Comunicación y Cultura</div></div>
         </div>
 
-        <div class="block block2">
+        <div class="block">
           <h3>SEGUNDO CUATRIMESTRE</h3>
           <div class="subject" data-id="semiotica"><div class="title">Semiótica</div></div>
           <div class="subject" data-id="arte_diseno"><div class="title">Arte y Diseño Digital</div></div>
@@ -200,30 +182,31 @@
       </div>
 
       <!-- SEGUNDO AÑO -->
-      <div class="year-card year2" aria-labelledby="y2">
+      <div class="year year2" aria-labelledby="y2">
         <h2 id="y2">SEGUNDO AÑO</h2>
 
-        <div class="block block1">
+        <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
           <div class="subject" data-id="estetica"><div class="title">Estética Audiovisual</div></div>
           <div class="subject" data-id="sonido"><div class="title">Sonido</div></div>
         </div>
 
-        <div class="block block2">
+        <div class="block">
           <h3>SEGUNDO CUATRIMESTRE</h3>
           <div class="subject" data-id="derecho"><div class="title">Derecho Audiovisual</div></div>
           <div class="subject" data-id="realizacion"><div class="title">Realización Audiovisual</div></div>
           <div class="subject" data-id="narrativa"><div class="title">Narrativa Transmedia</div></div>
           <div class="subject" data-id="edicion"><div class="title">Edición</div></div>
           <div class="subject" data-id="audiovisual_ii"><div class="title">Audiovisual II</div></div>
+          <div class="subject" data-id="tif"><div class="title">TIF (Trabajo Integrador Final)</div></div>
         </div>
       </div>
 
       <!-- TERCER AÑO -->
-      <div class="year-card year3" aria-labelledby="y3">
+      <div class="year year3" aria-labelledby="y3">
         <h2 id="y3">TERCER AÑO</h2>
 
-        <div class="block block1">
+        <div class="block">
           <h3>PRIMER CUATRIMESTRE</h3>
           <div class="subject" data-id="ingles"><div class="title">Inglés</div></div>
           <div class="subject" data-id="direccion_arte"><div class="title">Dirección de arte y Ambientación</div></div>
@@ -232,52 +215,50 @@
           <div class="subject" data-id="audiovisual_iii"><div class="title">Audiovisual III</div></div>
         </div>
 
-        <div class="block blockA">
-          <h3>TIF (Trabajo Integrador Final)</h3>
-          <div class="subject" data-id="tif"><div class="title">TIF (Trabajo Integrador Final)</div></div>
-        </div>
       </div>
     </div>
 
     <!-- practice box centered below -->
-    <div class="practice-wrap" aria-hidden="false">
+    <div class="practice-wrap">
       <div class="practice-box" role="region" aria-label="Prácticas profesionales">
         <div class="practice-title">Prácticas Profesionales — acreditan <strong>260 hs</strong></div>
-        <div class="small" style="color:#475; margin-bottom:8px">Acumulá horas y al alcanzar 260 hs se habilita TIF (además se deben aprobar todas las materias).</div>
+        <div class="small" style="margin-bottom:8px">Acumulá horas. Al alcanzar 260 hs, se habilita TIF (además deben aprobarse todas las materias).</div>
 
-        <div class="progress-bar" aria-hidden="false" title="Horas acreditadas">
+        <div class="progress-bar" title="Horas acreditadas">
           <div class="progress-fill" id="progressFill" style="width:0%"></div>
         </div>
 
         <div class="hours-controls" style="margin-top:12px">
           <input id="hoursInput" type="number" min="1" placeholder="Agregar horas..." aria-label="Agregar horas"/>
           <button id="addHoursBtn" class="btn">Agregar horas</button>
-          <div id="hoursText" style="font-weight:700; color:var(--color5); margin-left:10px"></div>
+          <div id="hoursText" style="font-weight:700; color:var(--color5); margin-left:10px">0 / 260 hs</div>
         </div>
 
-        <div class="controls" style="margin-top:12px">
-          <button id="resetBtn" class="btn ghost">Reiniciar progreso</button>
-          <button id="exportBtn" class="btn ghost">Exportar progreso</button>
-          <button id="importBtn" class="btn ghost">Importar progreso</button>
+        <div style="margin-top:12px; display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap">
+          <button id="resetBtn" class="btn" style="background:#fff;border:1px solid #eee">Reiniciar progreso</button>
+          <button id="exportBtn" class="btn" style="background:#fff;border:1px solid #eee">Exportar progreso</button>
+          <button id="importBtn" class="btn" style="background:#fff;border:1px solid #eee">Importar progreso</button>
         </div>
       </div>
     </div>
 
-    <!-- modal congrats -->
-    <div id="modalCongrats" class="modal" style="display:none">
+    <!-- modal generic -->
+    <div id="modal" class="modal" style="display:none">
       <div class="modal-card" role="dialog" aria-modal="true">
-        <h2>¡Felicidades, te recibiste!</h2>
-        <p>Ya sos <strong>Productor/ra Audiovisual</strong>.</p>
-        <button id="closeModalBtn">Cerrar</button>
+        <h2 id="modalTitle">Título</h2>
+        <p id="modalText">Texto</p>
+        <button id="modalClose">Cerrar</button>
       </div>
     </div>
+
   </div>
 
 <script>
-/* ------------------------
-   Prerrequisitos (ids)
-   ------------------------ */
+/* ----------------------------
+   Datos: prerrequisitos por id
+   ---------------------------- */
 const prereqs = {
+  // 1er año
   "electricidad": [],
   "guion": [],
   "medios": [],
@@ -289,6 +270,7 @@ const prereqs = {
   "fotografia": [],
   "audiovisual_i": [],
 
+  // 2do año
   "estetica": ["medios","semiotica"],
   "sonido": ["electricidad","guion"],
   "derecho": ["produccion_televisiva","audiovisual_i","produccion_comunitaria","estetica"],
@@ -303,40 +285,41 @@ const prereqs = {
   "electiva2": [],
   "audiovisual_iii": ["sonido","edicion","derecho"],
 
-  // TIF handled separately
+  // TIF special
   "tif": []
 };
 
-const allSubjects = Object.keys(prereqs).filter(id => id !== "tif");
+/* helper human names */
+function human(id){
+  const m = {
+    electricidad:"Electricidad y Mantenimiento", guion:"Guion", medios:"Medios de Comunicación y Cultura",
+    semiotica:"Semiótica", arte_diseno:"Arte y Diseño Digital", produccion_comunitaria:"Producción Comunitaria",
+    produccion_televisiva:"Producción Televisiva", fotografia:"Fotografía, Iluminación y Cámara", audiovisual_i:"Audiovisual I",
+    estetica:"Estética Audiovisual", sonido:"Sonido", derecho:"Derecho Audiovisual", realizacion:"Realización Audiovisual",
+    narrativa:"Narrativa Transmedia", edicion:"Edición", audiovisual_ii:"Audiovisual II", ingles:"Inglés",
+    direccion_arte:"Dirección de arte y Ambientación", electiva1:"Electiva I", electiva2:"Electiva II", audiovisual_iii:"Audiovisual III",
+    tif:"TIF (Trabajo Integrador Final)"
+  };
+  return m[id] || id;
+}
 
-/* localStorage keys */
-const LS_APPROVED = "malla_uncuyo_approved_v4";
-const LS_HOURS = "malla_uncuyo_hours_v4";
+/* all subject ids except TIF */
+const allSubjects = Object.keys(prereqs).filter(id=>id!=="tif");
 
-/* load state */
+/* LOCALSTORAGE KEYS */
+const LS_APPROVED = "malla_uncuyo_approved_v_final";
+const LS_HOURS = "malla_uncuyo_hours_v_final";
+
+/* load */
 let approved = JSON.parse(localStorage.getItem(LS_APPROVED)) || [];
 let hours = Number(localStorage.getItem(LS_HOURS)) || 0;
 
-function saveState(){
-  localStorage.setItem(LS_APPROVED, JSON.stringify(approved));
-  localStorage.setItem(LS_HOURS, String(hours));
-}
+/* save */
+function saveState(){ localStorage.setItem(LS_APPROVED, JSON.stringify(approved)); localStorage.setItem(LS_HOURS, String(hours)); }
 
-/* helpers */
-function human(id){
-  const map = {
-    "electricidad":"Electricidad y Mantenimiento","guion":"Guion","medios":"Medios de Comunicación y Cultura",
-    "semiotica":"Semiótica","arte_diseno":"Arte y Diseño Digital","produccion_comunitaria":"Producción Comunitaria",
-    "produccion_televisiva":"Producción Televisiva","fotografia":"Fotografía, Iluminación y Cámara","audiovisual_i":"Audiovisual I",
-    "estetica":"Estética Audiovisual","sonido":"Sonido","derecho":"Derecho Audiovisual","realizacion":"Realización Audiovisual",
-    "narrativa":"Narrativa Transmedia","edicion":"Edición","audiovisual_ii":"Audiovisual II","ingles":"Inglés",
-    "direccion_arte":"Dirección de arte y Ambientación","electiva1":"Electiva I","electiva2":"Electiva II","audiovisual_iii":"Audiovisual III",
-    "tif":"TIF (Trabajo Integrador Final)"
-  };
-  return map[id] || id;
-}
+/* unmet prereqs for id */
 function unmet(id){
-  if(id === "tif"){
+  if(id==="tif"){
     const missingSubjects = allSubjects.filter(sid => !approved.includes(sid));
     const miss = [];
     if(hours < 260) miss.push("260 hs de prácticas");
@@ -345,14 +328,16 @@ function unmet(id){
   }
   return (prereqs[id] || []).filter(r => !approved.includes(r)).map(human);
 }
+
+/* unlocked? */
 function unlocked(id){
-  if(id === "tif"){
+  if(id==="tif"){
     return hours >= 260 && allSubjects.every(sid => approved.includes(sid));
   }
   return unmet(id).length === 0;
 }
 
-/* render all subject boxes */
+/* render subjects UI state */
 function render(){
   document.querySelectorAll(".subject").forEach(el=>{
     const id = el.dataset.id;
@@ -367,49 +352,37 @@ function render(){
     }
   });
 
-  // progress fill and text
+  // progress
   const pct = Math.min(100, Math.round((hours/260)*100));
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("hoursText").textContent = hours + " / 260 hs";
 
-  // if tif was approved -> show modal
+  // check year completion messages
+  checkYearCompletion();
+
+  // if tif approved show congrats modal
   if(approved.includes("tif")){
-    showCongratsModal();
+    showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual");
   }
 }
 
-/* attach click behavior to each subject */
+/* attach clicks (delegation style is simpler, but we attach here) */
 document.querySelectorAll(".subject").forEach(el=>{
   el.addEventListener("click", ()=>{
     const id = el.dataset.id;
     if(!unlocked(id)){
-      // just focus (tooltip shows on hover)
       el.focus();
       return;
     }
     if(!approved.includes(id)){
       // approving
-      if(id === "tif"){
-        // final checks
-        const missing = unmet("tif");
-        if(missing.length){
-          alert("No podés aprobar TIF todavía. Faltan:\n" + missing.join("\n"));
-          return;
-        }
-        approved.push(id);
-        saveState();
-        render();
-        showCongratsModal();
-        return;
-      } else {
-        approved.push(id);
-        saveState();
-        render();
-        return;
-      }
+      approved.push(id);
+      saveState();
+      render();
+      return;
     } else {
-      // allow un-approve with cascade
-      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'? Se desaprobarán también las materias que dependan de ella.")){
+      // un-approve with cascade
+      if(confirm("¿Desmarcar como aprobada '" + human(id) + "'?\nSe desaprobarán las materias que dependan de ella.")){
         cascadeUnapprove(id);
         saveState();
         render();
@@ -419,7 +392,7 @@ document.querySelectorAll(".subject").forEach(el=>{
   el.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" ") { e.preventDefault(); el.click(); } });
 });
 
-/* cascade unapprove */
+/* cascade unapprove recursivo */
 function cascadeUnapprove(id){
   approved = approved.filter(x=>x!==id);
   Object.keys(prereqs).forEach(k=>{
@@ -427,10 +400,11 @@ function cascadeUnapprove(id){
       cascadeUnapprove(k);
     }
   });
+  // if tif approved and now locked, remove it
   if(approved.includes("tif") && !unlocked("tif")) approved = approved.filter(x=>x!=="tif");
 }
 
-/* hours controls */
+/* Add hours */
 document.getElementById("addHoursBtn").addEventListener("click", ()=>{
   const v = Number(document.getElementById("hoursInput").value || 0);
   if(!v || v <= 0){ alert("Ingresá una cantidad de horas válida (>0)."); return; }
@@ -441,7 +415,7 @@ document.getElementById("addHoursBtn").addEventListener("click", ()=>{
   render();
 });
 
-/* reset / export / import */
+/* reset export import */
 document.getElementById("resetBtn").addEventListener("click", ()=>{
   if(confirm("¿Seguro que querés reiniciar todo el progreso (aprobadas y horas)?")){
     approved = []; hours = 0; saveState(); render();
@@ -473,19 +447,45 @@ document.getElementById("importBtn").addEventListener("click", ()=>{
   }catch(err){ alert("JSON inválido: " + err.message); }
 });
 
-/* modal */
-function showCongratsModal(){ document.getElementById("modalCongrats").style.display = "flex"; }
-document.getElementById("closeModalBtn").addEventListener("click", ()=>{ document.getElementById("modalCongrats").style.display = "none"; });
+/* modal utilities */
+function showModal(title, text){
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalText").textContent = text;
+  document.getElementById("modal").style.display = "flex";
+}
+document.getElementById("modalClose").addEventListener("click", ()=>{ document.getElementById("modal").style.display = "none"; });
 
-/* initial render */
-render();
+/* year completion checks: when all subjects of year are approved, show message once */
+let shownYear1=false, shownYear2=false;
+function checkYearCompletion(){
+  // year1 ids:
+  const year1 = ["electricidad","guion","medios","semiotica","arte_diseno","produccion_comunitaria","produccion_televisiva","fotografia","audiovisual_i"];
+  const year2 = ["estetica","sonido","derecho","realizacion","narrativa","edicion","audiovisual_ii"];
+  const done1 = year1.every(id=> approved.includes(id));
+  const done2 = year2.every(id=> approved.includes(id));
+  if(done1 && !shownYear1){
+    shownYear1 = true;
+    showModal("¡Primer año adentro!", "¡Vamos que falta poco!");
+  }
+  if(done2 && !shownYear2){
+    shownYear2 = true;
+    showModal("¡Segundo años adentro!", "¡El último esfuerzo, VOS PODÉS!");
+  }
+  // if user un-approves causing year incomplete, allow re-show later
+  if(!done1) shownYear1=false;
+  if(!done2) shownYear2=false;
+}
 
-/* if tif already approved on load, show modal */
-if(approved.includes("tif")) setTimeout(showCongratsModal, 300);
+/* initial render: set tooltip etc */
+(function init(){
+  // set dataset ids in DOM are already present
+  render();
+  // if tif already approved show congrats
+  if(approved.includes("tif")) setTimeout(()=> showModal("¡Felicidades, te recibiste!", "Ya sos Productor/ra Audiovisual"), 300);
+})();
 </script>
 </body>
 </html>
-
 
 </script>
 </body>
